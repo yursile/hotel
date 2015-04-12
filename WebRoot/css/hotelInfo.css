@@ -1,0 +1,404 @@
+.container{
+	width: 1020px;
+}
+
+.roomtype-box{
+}
+
+.date-roomtype{
+	margin-left:10px;border:1px solid #e4e4e4;
+	border-collapse:collapse;text-align:center;
+	background:#fff;
+}
+.date-roomtype tbody td{
+	width:80px;height:78px;
+	text-align:center;
+	 border-style: solid none none solid;
+    border-width: 1px 0 0 1px;
+    border-color:#e4e4e4;
+}
+
+.roomtype-selected{
+	background-color: #f57d5d;
+
+}
+
+.roomtype-selected a{
+	    color: #fff;
+}
+
+a:focus{
+	outline:none;
+	text-decoration:none;	
+}
+
+a{	text-decoration:none;
+	color:#000;
+}
+a:hover{
+	text-decoration:none;
+}
+a:visited{
+	text-decoration:none;
+}
+.banner{
+	background-color: #5f594d;;overflow:hidden;
+	width:560px;height:30px;line-height:30px;
+	margin-bottom:0;cursor:pointer;
+	text-align:center;
+}
+.banner a{
+	color:#fff;display:inline-block;width:139px;
+}
+
+.banner .month-active{
+	background-color: #f57d5d;
+}
+.banner li{
+	float:left;
+}
+ul{
+	padding:0;
+	list-style-type:none;
+}
+.roomtype-ul{
+	float:left;
+	border:1px solid #e4e4e4;
+	text-align:center;margin-right:3px;
+	background:#fff;
+}
+.roomtype-ul li{
+	width:105px;height:32px;
+	border-bottom:1px solid #e4e4e4;
+	margin:0 auto;
+	line-height:32px;
+}
+
+.roomtype-ul li:hover{
+	cursor:pointer;
+	text-decoration:none;
+	color:#000;
+}
+
+.date-roomtype tbody td.selected{
+	border: 1px solid #f85530;
+}
+.weeks-title{
+	background-color: #d6d4ce;
+    border-top: 2px solid #f57d5d;
+    font-weight: normal;
+}
+h4{
+	height:33px;
+	background-color: #f8f8f7;
+    border-color: #e5e3e0 #e5e3e0 #f9e1b9;
+    border-style: solid;
+    border-width: 1px;
+     color: #97836d;
+    font-size: 15px;
+    line-height:33px;
+    padding-left:15px;	
+}
+
+.left-h{
+	width:438px;
+}
+.right-h{
+	width:528px;
+}
+
+figure{
+	
+}
+figure img{
+	 overflow: hidden;
+    width: 438px;
+    height:245px;
+}
+
+.control-pic{
+    margin-top: 5px;
+}
+
+.box-left{
+	width:438px;
+	float:left;
+}
+
+.link-prev, .link-next {
+    background: url("http://pic1.plateno.com/v/20140304/image2/booking/inn_info.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+    display: inline-block;
+    height: 36px;
+    overflow: hidden;
+    position: relative;
+    width: 25px;
+    z-index: 2;
+}
+.link-prev{
+	background-position:-20px -136px;float:left;
+	top: 25px;left: 5px;
+	margin-right:-9px;
+}
+
+.link-next{
+	 background-position: -113px -136px;float:right;
+	 top:25px;right:5px;
+}
+
+.picroll-box{
+	 width: 400px;
+	 position:relative;
+	 overflow:hidden;
+	 height:85px;
+}
+
+
+.pic-roll{
+	height: 85px;
+    text-align: center;
+    padding-top: 7px;
+    position: absolute;
+    z-index: 0;
+    margin-bottom:0;
+}
+
+.pic-roll img{
+	display: block;
+   	 height: 75px;
+    overflow: hidden;
+    width: 75px;
+}
+.pic-roll li{
+	display:inline-block;
+	cursor:pointer;
+	border:2px solid #fff;
+}
+
+.pic-roll .active{
+	border: 2px solid #f29759;
+}
+
+.box-right{
+	float: right;
+    position: relative;
+    width: 530px;
+    margin-bottom:10px;
+}
+
+.distance{
+	height: 275px;
+    position: relative;
+     background-color: #fffef8;
+   border:1px solid #f9e1b9;
+}
+.icon-distance{
+	 background: url("http://pic1.plateno.com/v/20140304/image2/booking/inn_info.png") no-repeat scroll -125px -10px rgba(0, 0, 0, 0);
+    display: inline-block;
+    height: 115px;
+    left: 30px;
+    position: absolute;
+    top: 90px;
+    width: 104px;
+}
+
+.comment{
+	clear:both;
+}
+
+dt,dd{
+	display:inline-block
+}
+.info-distance{
+	left: 160px;
+    line-height: 30px;
+    max-width: 378px;
+    min-height: 235px;
+    overflow: auto;
+    padding-right: 30px;
+    padding-top: 25px;
+    position: absolute;
+    color:#000;
+}
+
+.instruction{
+	margin-top:10px;
+	margin-bottom:20px;
+	color: #000;
+    font-family: arial,"Hiragino Sans GB","Microsoft Yahei",sans-serif;
+    font-size: 12px;
+    height:86px;
+}
+.address,.phone{
+	margin-top:10px;
+	margin-bottom:10px;
+	color: #000;
+    font-family: arial,"Hiragino Sans GB","Microsoft Yahei",sans-serif;
+    font-size: 12px;
+}
+
+.orderInfo{
+	width:308px;float:right;
+	color: #000;
+    font-family: arial,"Hiragino Sans GB","Microsoft Yahei",sans-serif; font-size: 12px;
+    background:#fff;
+}
+.orderInfo ul{
+	 background-color: #fff;
+    border-bottom: 1px solid #e4e4e4;
+    border-left: 1px solid #e4e4e4;
+    border-right: 1px solid #e4e4e4;
+    magin-top:0;
+}
+
+.orderInfo li{
+	margin:10px;
+}
+
+.orderInfo label{
+	width:50px;
+	text-align:right;margin-right:15px;
+}
+
+h3{
+	background-color: #f57d5d;
+    color: #fff;
+    font-size: 14px;
+    height: 27px;
+    line-height: 27px;
+    position: relative;
+    text-align: center;
+    margin-top:0;
+}
+.hidden-outline{
+	outline:none;
+	border-style:none;
+}
+.orderInfo input:focus{
+	outline:none;
+}
+.orderInfo input::-moz-focus-inner{
+	border:0;
+}
+.hl{
+	font-size:18px;
+	color: #f85530;
+}
+#submit-order{
+	display:inline-block; width:129px;height:35px;
+	background: url("http://pic1.plateno.com/v/20140609/image3/hotel/inn-rt-icons.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 0 none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 32px;
+    text-align: center;
+    background-position: 0 -76px;
+}
+#submit-order:hover{
+	background-position:0 -129px;
+}
+.wrapper{
+	width:100%;
+	position:relative;top:10px;
+	background: url("http://pic1.plateno.com/image2/hotel/cal_bg.gif") repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+h1{
+	font-size: 22px;
+}
+
+.comment-h{
+	margin:0;
+	height:33px;
+	background-color: #f8f8f7;
+    border-color: #e5e3e0 #e5e3e0 #f9e1b9;
+    border-style: solid;
+    border-width: 1px;
+     color: #97836d;
+    font-size: 15px;
+    line-height:33px;
+    padding-left:15px;
+}
+.comment-ul{
+	border-width:1px;
+	border-style:solid;
+	border-color:#e5e3e0;
+	border-top-style:none;
+	margin-top:0;
+}
+.comment-li{
+	padding:10px;
+	border-bottom:1px  dashed #ccc;
+	/*display:table-cell;vertical-align:center;*/
+}
+.comment-man{
+	width:130px;
+	color: #8a8a8a;
+    text-align: center;
+	display:inline-block;
+	float:left;
+}
+.comment-content{
+	width: 690px;
+	display:inline-block;margin-left:20px;
+	color: #000;font-size:12px;
+}
+.comment-time{
+	color: #CCC;
+}
+h2{
+	 color: #97836d;
+    font-size: 15px;
+    line-height:33px;
+    margin:0;
+}
+#personalCommnet{
+	float:right;
+	margin-right:20px;
+	color:#cf1616;
+}
+
+.page-box{
+	width:638px;
+	margin:0 auto;
+	text-align:center;
+}
+.page-box ul{
+	padding-top:5px;
+}
+.page-box li{
+	display:inline-block;
+	margin:0 10px 5px;
+}
+.p_btn{
+	color:#000;
+	text-decoration:none;
+	background-color: #f2f2f2;
+    border-color: #d9d9d9;
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 9px 0 10px;
+}
+.p_btn:hover{
+	background-color:#fafafa;
+	text-decoration:none;
+	color:#000;
+}
+.jump_num{
+	color:#000;
+}
+.jump_num:hover{
+	text-decoration:none;
+	color:#000;
+}
+
+.active{
+	color: #ff0505;
+    font-size: 15px;
+    font-weight: bolder;
+}

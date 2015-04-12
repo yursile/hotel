@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+	<!-- http://...../../hello -->
+	<struts>
+		<package name="user" extends="json-default" namespace="/user">
+			<action name="ajax_login" class="ajaxAction" method="login">
+				<result name="login" type="json">
+					<param name="ignoreHierarchy">false</param>
+            		<param name="includeProperties">result</param>
+				</result>
+			</action>
+			
+			<action name="regist" class="userAction" method="regist">
+				<result name="success" type="json">
+					<param name="ignoreHierarchy">false</param>
+            		<param name="includeProperties">result</param>
+				</result>
+			</action>
+			
+			<action name="login" class="userAction" method="login">
+				<result name="success">/index.jsp</result>
+			</action>
+			
+			<action name="testAction" class="testAction">
+				<result name="success">/index.jsp</result>
+			</action>
+		</package>
+	</struts>

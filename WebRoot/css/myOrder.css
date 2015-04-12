@@ -1,0 +1,223 @@
+#filterBox{
+	background:rgb(241,241,241);
+	list-style-type:none;
+}
+#filterBox>li{
+	list-style-type:none;display:inline-block;
+	height:52px;line-height:52px;
+}
+ul,li{
+	list-style-type:none;
+}
+#filterBox input,#filterBox label,#filterBox select{
+	padding-left:15px;
+}
+.ipt{
+	border: 1px solid #c5c5c5;
+	width:140px;
+	border-radius: 3px;
+    height: 25px;
+    line-height: 25px;
+    padding-left: 10px;
+}
+#filterBox label{
+	font-size: 13px;
+	font-family: arial,"Hiragino Sans GB","Microsoft Yahei",sans-serif;
+}
+.search-btn{
+	border-radius: 0;
+    width: 100px;
+    height: 25px;
+    line-height: 25px;
+   
+    margin-left:10px;
+}
+.order-nav{
+	height:30px;
+	line-height: 30px;
+}
+.order-nav li{
+	display:inline-block;
+}
+.nav-title{
+	 font-size: 15px;
+    font-weight: bold;
+}
+.active a,.nowPage{
+	color: #f00;
+    font-size: 15px;
+}
+a{
+	color:#000;
+}
+
+.order-box table{
+	text-align:center;
+}
+.order-box th{
+	text-align:center;
+}
+.order-box thead{
+	background-color: #eae9e6;
+    border-bottom: thin solid #eae9e6;
+    height: 30px;
+}
+.order-box tbody tr{
+	border-bottom: thin dashed #eae9e6;
+	height: 75px;
+}
+.orderId,.hotelName,.op{
+	color: #ff0000;
+}
+.orderId:hover,.hotelName:hover,.op:hover{
+	color:#f00;
+}
+.price-td{
+	  color: #5c96ff;
+    font-size: 18px;
+}
+time{
+	display:block
+}
+.page-box{
+	 padding: 5px 0;
+    text-align: center;
+    background:rgb(234,233,230);
+}
+.page-box ul{
+	padding:0;margin:0;
+}
+.page-box li{
+	display:inline-block;
+	margin:0 10px;
+}
+.p_btn{
+	padding:0 10px;
+	color: #adadad;
+	 background-color: #f2f2f2;
+    border-color: #d9d9d9;
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+}
+.p_btn:hover{
+	color: #adadad;
+	text-decoration:none;
+}
+.page-num:hover{
+	color:#000;
+	text-decoration:none
+}
+
+
+
+
+
+
+
+.modal_bd{
+	display:none;
+	border: 1px solid #cfcfcf;
+	box-shadow: 0 0 4px #ccc;
+	padding: 5px 0;
+    position: absolute;
+    text-align: left;
+    top: 100%;
+    z-index: 1000;
+    background:#fff;
+    width:441px;
+}
+.dropdown-menu li{
+	display:inline-block;
+}
+.dropdown-menu {
+	min-width:345px;
+	font-size:12px;
+}
+.dropdown-menu > li > a{
+	padding:3px 5px;
+}
+
+.date-com{
+	 width: 441px;height:100px;
+	 border: 1px solid #cfcfcf;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+    outline: 0 none;
+}
+.date-header{
+	background:#4e3c36;
+	 height:26px;
+}
+.ico{
+	width: 25px;display:inline-block;height:25px;
+	background:url("http://www.plateno.com/image2/base/widget.png") no-repeat;
+}
+.ico-pre{
+	background-position:-23px -22px;
+}
+.ico-next{
+	background-position:-1px -22px;
+}
+
+.date-title{
+	width:150px;color:#fff;text-align:center;display:inline-block;line-height:26px;
+}
+.fl{
+	float:left;
+}
+.fr{
+	float:right;
+}
+.date-tb{
+	margin:5px 20px 0 10px;;
+}
+.date-tb thead{
+	height:26px;
+	background:rgb(235,235,235);
+}
+.weekend{
+	color:#fc631b;
+}
+.date-tb a{
+	display:inline-block;
+	width:26px;height:24px;padding:1px;text-align:center;
+	font-size: 12px;
+    line-height: 20px;
+	text-decoration:none;
+}
+.date-tb a:hover{
+	background:#eee8dc;
+	cursor:pointer;
+}
+.hotel-tb{
+	width:914px;
+	border:1px rgb(249,225,185) solid;
+ 	color: #000;
+    font-family: arial,"Hiragino Sans GB","Microsoft Yahei",sans-serif;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.hotel-tb thead{
+	background:rgb(255,254,249);
+	border-bottom:1px rgb(249,225,185) solid;
+}
+.date-bd{
+	overflow:hidden;
+}
+.date-bd-l{
+	float:left;
+	border-right: 1px solid #cfcfcf;
+	height:175px;
+}
+.date-bd-r{
+	float:right;
+}
+.dropdown_modal{
+	display:inline-block;
+	position:relative;
+	line-height:normal;
+}

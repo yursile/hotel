@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hotel.entity">
+	<class name="Room" table="tb_Room"><!-- 每个class对应一个持久化对象 -->
+		<id name="id" type="long"><!-- id元素用来定义主键标识,并指定主键生成策略 -->
+			<generator class="native" />
+		</id>
+		<property name="type"></property>
+		<property name="price"></property>
+		<set cascade="save-update" inverse="true" lazy="false" name="roomRemains">
+			<key column="room_id" />
+			<one-to-many class="RoomRemain" />
+		</set>
+		<property name="num"></property>
+		<many-to-one unique="true" name="picture" class="Pic" column="pic_id"></many-to-one>		
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+validator.Checked=WebRoot/order.jsp,WebRoot/regist.jsp,WebRoot/info.jsp,WebRoot/myOrder.jsp,WebRoot/index.jsp,WebRoot/hotelInfo.jsp
+validator.Revalidate=true
+validator.Unchecked=
