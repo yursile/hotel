@@ -2,8 +2,8 @@
 insert into tb_customer(id,name,phone,password,IDCard,type,birthday,pic_id) VALUES (001,'旷宇','18580680138','safeandsound','500225199002133817',0,19920913,null);
 insert into tb_hotel(id,name,address,phone,href,city,district) VALUES (001,'江北一店','江北嘴','023748594','fdsa','重庆','江北');
 insert into tb_hotel(id,name,address,phone,href,city,district) VALUES (002,'江北二店','观音桥','023748804','dag','重庆','江北');
-insert into tb_hotel(id,name,address,phone,href,city,district) VALUES (002,'江北三店','大石坝','023748804','dag','重庆','江北');
-insert into tb_hotel(id,name,address,phone,href,city,district) VALUES (003,'南坪一店','万达广场','024348804','dag','重庆','南坪');
+insert into tb_hotel(id,name,address,phone,href,city,district) VALUES (003,'江北三店','大石坝','023748804','dag','重庆','江北');
+insert into tb_hotel(id,name,address,phone,href,city,district) VALUES (004,'南坪一店','万达广场','024348804','dag','重庆','南坪');
 insert into tb_room(id,type,price,num,pic_id,hotel_id) values (001,'经济房',99,20,null,001);
 
 insert into tb_room(id,type,price,num,pic_id,hotel_id) values (002,'传统大床房',199,20,null,001);
