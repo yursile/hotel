@@ -30,10 +30,18 @@ public class HotelServiceImpl implements HotelService{
 				"RoomRemain rr on rr.room = r where rr.day>=? and rr.day<=? " +
 				"and h.city=? " +"and h.district=? and rr.remain>0";
 		
+		String hq = "from Hotel h where h.rooms.roomRemains.day>=? and h.rooms.roomRemains.day<=?"+
+					"and h.city=? and h.district=? and h.rooms.roomRemains.remain>0";
 		
 		
+		String hql2 = "from Hotel as h join h.rooms as room join room.roomRemains as rr "+
+						"where h.city=? and h.district=? and rr.day>=? and rr.day<=? and rr.remain>0";
+		
+		
+		String hql3 = "from Hotel as h join h.rooms as room join room.roomRemains as rr "+
+				"where h.city=? and h.district=? and room = some (select rr.room from rr where rr.day>=? and rr.day>=? and rr.remain>0)";
 		try {
-			List<Hotel> hotels = hotelDAO.findHotels(hql,city,district,formatTime(arriveDate),formatTime(departureDate));
+			List<Hotel> hotels = hotelDAO.findHotels(hql3,city,district,formatTime(arriveDate),formatTime(departureDate));
 			return hotels;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
