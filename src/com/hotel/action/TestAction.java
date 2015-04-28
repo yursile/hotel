@@ -34,7 +34,7 @@ public class TestAction {
 		order.setHotel(hotel);
 		order.setRoom(room2);
 		order.setCustomer(customer);
-		orderService.saveOrder(order);
+		//orderService.saveOrder(order);
 //		List<Order>orders = orderService.findOrderByCustomerId(12);
 		
 		return "success";

@@ -4,12 +4,20 @@
 	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
 	<struts>
 		<package name="hotel" extends="json-default" namespace="/hotel">
+		
+			<action name="*Action" class="dispatchAction" method="{1}">
+				<result name="{1}">/{1}.jsp</result>
+			</action>
+		
 			<action name="quickSearchAction" class="quickSearchAction" >
 				<result name="success" type="json">
 					<param name="ignoreHierarchy">false</param>
-            		<param name="includeProperties">result</param>
+            		<param name="root">hotels</param>
 				</result>
 			</action>
 			
+			<action name="hotelInfoAction" class="hotelAction" method="hotelInfo">
+				<result name="hotelInfo">/hotelInfo.jsp</result>
+			</action>
 		</package>
 	</struts>

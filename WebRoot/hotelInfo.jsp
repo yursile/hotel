@@ -92,33 +92,60 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <div class="wrapper">
 	    <div class="container" style="margin-top:60px">
-	    	<h1>重庆沙坪坝店</h1>
+	    	<h1>重庆沙坪坝店${sessionScope.arriveDate}</h1>
 	    	
 	    	<div class="roomtype-box">
 	    		<ul class="roomtype-ul">
-	    			<li class="roomtype-selected"><a href="javascript:void(0)" >经济房</a></li>
-	    			<li><a href="javascript:void(0)" >自主大床房</a></li>
-	    			<li><a href="javascript:void(0)" >商务大床房</a></li>
-	    			<li><a href="javascript:void(0)" >版主双床房</a></li>
-	    			<li><a href="javascript:void(0)" >传统双床房</a></li>
-	    			<li><a href="javascript:void(0)" >设备双床房</a></li>
+	    			
+	    			<c:forEach items="${hotel.rooms}" var="room">
+	    				<c:choose> 
+		    				<c:when test="${roomType==room.type}">
+		    					<li class="roomtype-selected">
+		    						<a href="javascript:void(0)">${room.type}</a>
+		    						<span class="roomId">${room.id}</span>
+		    					</li>
+		    				</c:when> 
+		    				<c:otherwise>
+		    					<li>
+		    						<a href="javascript:void(0)" >${room.type}</a>
+		    						<span class="roomId">${room.id}</span>
+		    					</li>
+		    				</c:otherwise>
+		    					
+		    			</c:choose>
+	    			</c:forEach>
 	    		</ul>
 	
 				<div class="orderInfo">
 					<h3>预订信息</h3>
 					<form id="hotel-orderForm">
 					<ul>
-						<li>
-							<label >姓名</label>
-							<input type="text"/>
-						</li>
-						<li>
-							<label>手机号码</label>
-							<input type="text"/>
-						</li>
+						<c:choose>
+						<c:when test="${sessionScope.loginCustomer!=null}">
+							<li>
+								<label >姓名</label>
+								<input type="text" value="${sessionScope.loginCustomer.name }" />
+							</li>
+							<li>
+								<label>手机号码</label>
+								<input type="text" value="${sessionScope.loginCustomer.phone }" />
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li>
+								<label >姓名</label>
+								<input type="text" placeholder="请输入姓名" />
+							</li>
+							<li>
+								<label>手机号码</label>
+								<input type="text" placeholder="请输入手机" />
+							</li>
+						</c:otherwise>
+						</c:choose>
+					
 						<li>
 							<label>房型 </label>
-							<input type="text" value="1278976" class="hidden-outline" />
+							<input type="text" value="${roomType}" class="hidden-outline"/>
 						</li>
 						<li>
 							<label>预订天数</label>
@@ -126,7 +153,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</li>
 						<li>
 							<label>数量</label>
-							<select id="num">
+							<select id="num" name="num">
 								<option>1间</option>
 								<option>2间</option>
 								<option>3间</option>
@@ -139,6 +166,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li style="text-align:center">
 							<a href="javascript:void(0)" id="submit-order"></a>
 						</li>
+						<li class="hidden">
+							<input type="text" id="hotelId" name="hotelId" value="${hotel.id}"/>
+						</li>
+						
 					</ul>
 					</form>
 				</div>
@@ -176,21 +207,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<div class="box-left">
 	    		<figure>
 	    			<figcaption><h4 class="left-h">酒店图片</h4></figcaption>
-	    			<img src="http://img1.plateno.com/inn/023040/e0c533bc6b7bac44b4c2463365d709b6_640_480.jpg" />
+	    			<c:forEach items="${hotel.pics}" var="pic" end="0">
+    					<img src="${pic.path}"/>
+    				</c:forEach>
 	    		</figure>
 	    		<div class="control-pic">
 	    			<a href="javascript:void(0)" class="link-prev" title="上一页"></a>
 	    			<a href="javascript:void(0)" class="link-next" title="下一页"></a>
 	    			<div class="picroll-box">
 	    			<ul class="pic-roll">
+	    				<c:forEach items="${hotel.pics}" var="pic0" end="0">
+	    					<img src="${pic0.path}"/>
+	    				</c:forEach>
+	    				
+	    				<c:forEach items="${hotel.pics}" var="pic" begin="1">
+	    					<li class="active"><img  src="${pic.path}"></li>
+	    				</c:forEach>
+	    				<!-- 
 	    				<li class="active"><img  src="http://img1.plateno.com/inn/023040/e2d45cb45af35a3912563a99c973790e_120_120.jpg"></li><li><img  src="http://img1.plateno.com/inn/023040/5b54802ab4058d064a398b37f4b665f5_120_120.jpg"></li><li><img  src="http://img1.plateno.com/inn/023040/e2abb0a72aa00d4f9def423c49f6801b_120_120.jpg"></li><li><img  src="http://img1.plateno.com/inn/023040/e2d45cb45af35a3912563a99c973790e_120_120.jpg"></li><li><img src="http://img1.plateno.com/inn/023040/5b54802ab4058d064a398b37f4b665f5_120_120.jpg"></li><li><img class="" src="http://img1.plateno.com/inn/023040/e2abb0a72aa00d4f9def423c49f6801b_120_120.jpg"></li>
+	    				 -->
 	    			</ul>
 	    			</div>
 	    		</div>
 	    		
 	    		<p class="instruction">酒店位于重庆北碚区中心地段云泉路18号天生市场国美电器旁,距离西南大学仅仅500米。至轻轨6号线终点站北碚站不足150米。距离悦来会展中心约15分钟车程。步行2分钟即可到达天奇广场步行街，步行3分钟到达北碚区客运中心，在此可乘坐到重庆主城各区线路车、北碚旅游景区路线车和北碚周边路线车,紧邻朝阳中学、田家炳中学、</p>
-	    		<p class="address">地址：北碚区云泉路18号（天生市场国美电器旁 ）地铁北碚站2A出口直行一百米右转二十米，西南大学一号门往区门诊方向下行一百米</p>
-	    		<p class="phone">电话：023-86083388</p>
+	    		<p class="address">${hotel.address }</p>
+	    		<p class="phone">${hotel.phone }</p>
     		</div>
     		
     		<div class="box-right">
@@ -277,7 +319,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="jquery-ui.min.js"></script>
    	<script>
    		$(function(){
-   			
+   		
 	   		(function(){
 		   		var d = new Date();
 				var year = d.getFullYear();
@@ -361,6 +403,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			
    			//图片轮播
    			$(".link-next").click(function(){
+   			
    				$(".pic-roll").offset({
    					left:$(".pic-roll").offset().left-($(".pic-roll img").width()+3)
    				});
@@ -387,8 +430,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    				$("figure img").attr("src",img);
    			});
    			
+   			
+   			
    		});
    		
    		
    	</script>
+   	<script src="js/hotelInfo.js"></script>
 </html>

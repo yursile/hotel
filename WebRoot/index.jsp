@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div id="navbar" class="navbar-collapse collapse" style="float: left">
             <ul class="nav navbar-nav">
               <li class="active"><a href="#">首页</a></li>
-                <li><a href="order.jsp">预订</a></li>
+                <li><a href="hotel/toOrderAction.action">预订</a></li>
                 <li><a href="#about">企业差旅</a></li>
                 <li><a href="#contact">关于yursile</a></li>
             </ul>

@@ -402,3 +402,11 @@ h2{
     font-size: 15px;
     font-weight: bolder;
 }
+
+.hidden{
+	display:none;
+}
+
+.roomId{
+	display:none;
+}

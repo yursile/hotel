@@ -6,4 +6,5 @@
 	<struts>
 		<include file="com/hotel/struts/config/struts-user.xml"></include>
 		<include file="com/hotel/struts/config/struts-hotel.xml"></include>
+		<include file="com/hotel/struts/config/struts-order.xml"></include>
 	</struts>

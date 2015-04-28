@@ -20,7 +20,7 @@
 			</action>
 			
 			<action name="login" class="userAction" method="login">
-				<result name="success">/index.jsp</result>
+				<result name="success" type="json">/index.jsp</result>
 			</action>
 			
 			<action name="testAction" class="testAction">

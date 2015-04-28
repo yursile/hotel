@@ -26,25 +26,11 @@ public class HotelServiceImpl implements HotelService{
 	@Override
 	public List<Hotel> findHotels(String city, String district,
 			String arriveDate, String departureDate) {
-		String hql = "from Hotel h inner join Room r on h=r.hotel inner join " +
-				"RoomRemain rr on rr.room = r where rr.day>=? and rr.day<=? " +
-				"and h.city=? " +"and h.district=? and rr.remain>0";
-		
-		String hq = "from Hotel h where h.rooms.roomRemains.day>=? and h.rooms.roomRemains.day<=?"+
-					"and h.city=? and h.district=? and h.rooms.roomRemains.remain>0";
-		
-		
-		String hql2 = "from Hotel as h join h.rooms as room join room.roomRemains as rr "+
-						"where h.city=? and h.district=? and rr.day>=? and rr.day<=? and rr.remain>0";
-		
-		
-		String hql3 = "from Hotel as h join h.rooms as room join room.roomRemains as rr "+
-				"where h.city=? and h.district=? and room = some (select rr.room from rr where rr.day>=? and rr.day>=? and rr.remain>0)";
+		String SQL = "select * from tb_hotel where city=? and district=? and id in (select hotel_id from tb_room where id in (select t.room_id from (select * from tb_roomremain where day >=? and day<=?) t group by t.room_id having MIN(t.remain) > 0 ))";
 		try {
-			List<Hotel> hotels = hotelDAO.findHotels(hql3,city,district,formatTime(arriveDate),formatTime(departureDate));
+			List<Hotel> hotels = hotelDAO.findHotels(SQL,city,district,formatTime(arriveDate),formatTime(departureDate));
 			return hotels;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -56,5 +42,47 @@ public class HotelServiceImpl implements HotelService{
 
 	public void setHotelDAO(HotelDAO hotelDAO) {
 		this.hotelDAO = hotelDAO;
+	}
+
+	@Override
+	public Hotel findHotelById(long id) {
+		return hotelDAO.findHotelById(id);
+	}
+
+	@Override
+	public List<Hotel> findHotels(String city) {
+		String SQL = "select * from tb_hotel where city=?";
+		try {
+			List<Hotel> hotels = hotelDAO.findHotels(SQL,city);
+			return hotels;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<Hotel> findHotels(String city, String district) {
+		String SQL = "select * from tb_hotel where city=? and district=?";
+		try {
+			List<Hotel> hotels = hotelDAO.findHotels(SQL,city,district);
+			return hotels;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<Hotel> findHotels(String city, String arriveDate,
+			String departureDate) {
+		String SQL = "select * from tb_hotel where city=? and id in (select hotel_id from tb_room where id in (select t.room_id from (select * from tb_roomremain where day >=? and day<=?) t group by t.room_id having MIN(t.remain) > 0 ))";
+		try {
+			List<Hotel> hotels = hotelDAO.findHotels(SQL,city,formatTime(arriveDate),formatTime(departureDate));
+			return hotels;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

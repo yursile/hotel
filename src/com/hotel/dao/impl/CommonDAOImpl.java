@@ -54,4 +54,10 @@ public class CommonDAOImpl<E> extends HibernateDaoSupport implements CommonDAO<E
 		return curent.get(0);
 	}
 
+	@Override
+	public E findById(String hql, long id) throws Exception {
+		List<E> curent= this.getHibernateTemplate().find(hql,id);
+		return curent.get(0);
+	}
+
 }

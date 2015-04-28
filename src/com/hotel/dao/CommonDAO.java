@@ -9,4 +9,5 @@ public interface CommonDAO<E> {
 	public void delete(Object o)throws Exception;
 	public void update(Object o)throws Exception;
 	public E findDataByString(String hql, String str) throws Exception;
+	public E findById(String hql,long id) throws Exception;
 }

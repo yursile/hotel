@@ -1,5 +1,6 @@
 package com.hotel.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.hotel.entity.Hotel;
@@ -19,26 +20,32 @@ public class QuickSearchAction extends BaseAction{
 	
 	
 	public String execute(){
-	
-		setHotels(hotelService.findHotels(city, district, arriveDate, departureDate));
+		session.put("arriveDate", arriveDate);
+		session.put("departureDate", departureDate);
+		
+		if(district.trim().length()==0&&arriveDate.trim().length()==0){
+			hotels = hotelService.findHotels(city);
+		}else if(district.trim().length()==0&&arriveDate.trim().length()!=0){
+			hotels = hotelService.findHotels(city, arriveDate, departureDate);
+		}else if(district.trim().length()!=0&&arriveDate.trim().length()==0){
+			hotels = hotelService.findHotels(city, district);
+		}else{
+			setHotels(hotelService.findHotels(city, district, arriveDate, departureDate));
+		}
 		return "success";
 	}
-
 
 	public String getCity() {
 		return city;
 	}
 
-
 	public void setCity(String city) {
 		this.city = city;
 	}
 
-
 	public String getDistrict() {
 		return district;
 	}
-
 
 	public void setDistrict(String district) {
 		this.district = district;

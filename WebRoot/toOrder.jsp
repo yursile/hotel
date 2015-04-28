@@ -215,14 +215,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     	<div class="hotels">
     		<ul>
+    			<c:forEach items="${hotels}" var="hotel">  
+				
     			<li>
     				<figure>
-    					<img class="fig-img" src="http://img1.plateno.com/inn/023040/e2d45cb45af35a3912563a99c973790e_120_120.jpg"/>
+    				<!--  -->
+    					<c:forEach items="${hotel.pics}" var="pic" end="0"> 
+    						<img class="fig-img" src="${pic.path}"/>
+    					</c:forEach>
+    					
     					<a class="watchpic">查看相册</a>
     					<figcaption>
-    						<h3><a class="fig-title" href="#">7天重庆北碚轻轨总站西南大学店</a></h3>
-    						<address>北碚区云泉路18号（天生市场国美电器旁 ）地铁北碚站2A出口直行</address>
-    						<p class="phone">124u923334</p>
+    						<h3><a class="fig-title" href="#">${hotel.name}</a></h3>
+    						<address>${hotel.address}</address>
+    						<p class="phone">${hotel.phone}</p>
     					</figcaption>
     				</figure>
 	    				<table class="hotel-tb">
@@ -234,26 +240,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    						</tr>
 	    					</thead>
 	    					<tbody>
+	    						<c:forEach items="${hotel.rooms}" var="room">  
 	    						<tr>
-	    							<td>自主大床房</td>
-	    							<td>￥163</td>
-	    							<td>￥155</td>
-	    							<td><a class="quickorder">预订</a></td>
+	    							<td>${room.type }</td>
+	    							<td>￥${room.price }</td>
+	    							<td>￥${room.price }</td>
+	    							<td><a class="quickorder" href="hotel/hotelInfoAction.action?hotelId=${room.id}&roomType=${room.type}">预订</a></td>
 	    						</tr>
-	    						<tr>
-	    							<td>自主大床房</td>
-	    							<td>￥163</td>
-	    							<td>￥155</td>
-	    						</tr>
-	    						<tr>
-	    							<td>自主大床房</td>
-	    							<td>￥163</td>
-	    							<td>￥155</td>
-	    						</tr>
+	    						</c:forEach>
 	    					</tbody>
 	    				</table>
     			</li>
-    			
+    			</c:forEach> 
     			<li>
     				<figure>
     					<img class="fig-img" src="http://img1.plateno.com/inn/023040/e2d45cb45af35a3912563a99c973790e_120_120.jpg"/>
@@ -470,7 +468,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		$("#search-btn").click(function(){
    			$.get("hotel/quickSearchAction",$("#search-form").serialize(),function(hotels){
    				//返回hotels数组 hotel:img name href address phone rooms room.name room.price
-   				datas = [];
+   				//datas = [];
    				$.merge(datas,hotels);
    				var numPerPage = $("#numPerPage").val();
    				var str = createLi(hotels,numPerPage);
@@ -487,16 +485,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					str.push('<li></li>');
 				}
 				str.push('<figure>');
-				str.push('<img class="fig-img" src="'+hotel.img+'">');
+				str.push('<img class="fig-img" src="'+hotel.pics[0].path+'">');
 				str.push('<a class="watchpic">查看相册</a>');
-				str.push('<figcaption><h3><a class="fig-title" href="'+hotel.href+'">"'+hotel.name+'"</a></h3>');
-				str.push('<address>"'+address+'"</address>');
-				str.push('<p class="phone">"'+hotel.phone+'"</p>');
+				str.push('<figcaption><h3><a class="fig-title" href="hotel/hotelInfoAction.action?hotelId='+hotel.id+'">'+hotel.name+'</a></h3>');
+				str.push('<address>'+hotel.address+'</address>');
+				str.push('<p class="phone">'+hotel.phone+'</p>');
 				str.push('</figcaption></figure>');
 				str.push('<table class="hotel-tb"><thead><tr><td>房型</td><td>门市价</td><td>市场价</td></tr></thead>');
 				str.push('<tbody>');
 				$.each(hotel.rooms,function(i,room){
-					str.push('<tr><td>room.name</td><td>room.price</td>td>room.price</td><td><a class="quickorder">预订</a></td></tr>');
+					str.push('<tr><td>'+room.type+'</td><td>'+room.price+'</td><td>'+room.price+'</td><td><a class="quickorder" href="hotel/hotelInfoAction.action?hotelId='+hotel.id+'&roomType='+room.type+'">预订</a></td></tr>');
 				});
 				str.push('</tbody></table></li>');
 			});

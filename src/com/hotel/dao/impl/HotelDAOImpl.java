@@ -5,12 +5,14 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.hotel.dao.HotelDAO;
 import com.hotel.entity.Hotel;
+import com.hotel.entity.Order;
 
 public class HotelDAOImpl extends HibernateDaoSupport implements HotelDAO {
 
@@ -21,13 +23,48 @@ public class HotelDAOImpl extends HibernateDaoSupport implements HotelDAO {
 		return (List<Hotel>)this.getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session) throws HibernateException,
 					SQLException {
-				Query query = 
-					session.createQuery(hql);
-				query.setString(2, city);
-				query.setString(3, district);
-				query.setInteger(0, arriveDate);
-				query.setInteger(1, departureDate);
-				List<Hotel> list = query.list();
+				List<Hotel> list =  ((SQLQuery) session.createSQLQuery(hql).setParameter(0, city).setParameter(1, district).setParameter(2, arriveDate).setParameter(3, departureDate)).addEntity(Hotel.class).list();
+				return list;
+			}
+		});
+	}
+
+	@Override
+	public Hotel findHotelById(long id) {
+		Hotel hotel = (Hotel) this.getHibernateTemplate().find("from Hotel h where h.id=?", id).get(0);
+		return hotel;
+
+	}
+
+	@Override
+	public List<Hotel> findHotels(final String hql,final String city) {
+		return (List<Hotel>)this.getHibernateTemplate().execute(new HibernateCallback() {
+			public Object doInHibernate(Session session) throws HibernateException,
+					SQLException {
+				List<Hotel> list = ((SQLQuery) session.createSQLQuery(hql).setParameter(0, city)).addEntity(Hotel.class).list();
+				return list;
+			}
+		});
+	}
+
+	@Override
+	public List<Hotel> findHotels(final String hql,final String city, final String district) {
+		return (List<Hotel>)this.getHibernateTemplate().execute(new HibernateCallback() {
+			public Object doInHibernate(Session session) throws HibernateException,
+					SQLException {
+				List<Hotel> list =  ((SQLQuery) session.createSQLQuery(hql).setParameter(0, city).setParameter(1, district)).addEntity(Hotel.class).list();
+				return list;
+			}
+		});
+	}
+
+	@Override
+	public List<Hotel> findHotels(final String hql,final String city, final int arriveDate,
+			final int departureDate) {
+		return (List<Hotel>)this.getHibernateTemplate().execute(new HibernateCallback() {
+			public Object doInHibernate(Session session) throws HibernateException,
+					SQLException {
+				List<Hotel> list =  ((SQLQuery) session.createSQLQuery(hql).setParameter(0, city).setParameter(1, arriveDate).setParameter(2, departureDate)).addEntity(Hotel.class).list();
 				return list;
 			}
 		});

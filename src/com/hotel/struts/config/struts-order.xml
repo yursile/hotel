@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+	<struts>
+		<package name="order" extends="json-default" namespace="/order">
+			<action name="orderAction" class="com.hotel.action.OrderAction" method="toOrder">
+				<result name="success">/orderSuccess.jsp</result>
+			</action>
+		</package>
+	</struts>

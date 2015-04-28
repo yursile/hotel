@@ -93,6 +93,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 		$(function($) {
+		
+			
   			$(".regbtn").click(function(){
   			/*
   				$("#regForm").promise().then(function(){
