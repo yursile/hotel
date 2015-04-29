@@ -15,6 +15,6 @@
 		<property name="status"></property>
 		<property name="num"></property>
 		<property name="price"></property>
-		<many-to-one name="room" cascade="save-update" class="Room" unique="true" column="room_id" lazy="false"></many-to-one>			
+		<many-to-one name="room" cascade="save-update" class="Room"  column="room_id" lazy="false"></many-to-one>			
 	</class>	
 </hibernate-mapping>

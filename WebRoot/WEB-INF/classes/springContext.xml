@@ -25,7 +25,7 @@
     			<entry key="hibernate.show_sql" value="true"></entry>
     			<entry key="hibernate.format_sql" value="true"></entry>
    				 <!--<entry key="hibernate.hbm2ddl.auto" value="create"></entry>-->
-    			 <entry key="hibernate.hbm2ddl.auto" value="update"></entry>
+    			 <entry key="hibernate.hbm2ddl.auto" value="create"></entry>
     		</map>
     	</property>
     	<property name="mappingResources">
@@ -100,10 +100,14 @@
    		<property name="orderDAO" ref="orderDAO"></property>
    		<property name="roomService" ref="roomService"></property>
    		<property name="hotelService" ref="hotelService"></property>
+   		<property name="roomRemainService" ref="roomRemainService"></property>
    </bean>
    
    <bean id="hotelService" class="com.hotel.service.impl.HotelServiceImpl">
    		<property name="hotelDAO" ref="hotelDAO"></property>
+   </bean>
+   
+   <bean id="roomRemainService" class="com.hotel.service.impl.RoomRemainServiceImpl">
    </bean>
    
    <bean id="roomService" class="com.hotel.service.impl.RoomServiceImpl">
@@ -113,6 +117,7 @@
    <bean id="orderDAO" class="com.hotel.dao.impl.OrderDAOImpl">
     	<property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
+    
     
     <bean id="commonDAO" class="com.hotel.dao.impl.CommonDAOImpl">
     	<property name="sessionFactory" ref="sessionFactory"></property>

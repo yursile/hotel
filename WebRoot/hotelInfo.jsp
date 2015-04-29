@@ -77,7 +77,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  		<c:when test="${sessionScope.loginCustomer.name!=null}">退出</c:when>
                  		<c:otherwise>登录</c:otherwise>
                  	</c:choose>
-                 	
                  </a></li>
                  <li><a href="regist.jsp">注册</a></li>
               </ul>
@@ -88,6 +87,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
       </div>
     </div><!-- nav结束 -->
+    
+     <div class="modal fade" id="loginForm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:400px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title">登录</h4>
+                </div>
+                <div class="modal-body">
+                <form method="get" action="user/login" name="loginForm" id="loginForm">
+               
+                   <label class="sr-only" for="userName" >用户名</label>
+                   <input  id="userName" class="form-control" placeholder="用户名/手机号码" required autofocus name="customer.phone">
+                   <label class="sr-only" for="inputPassword">密码</label>
+                   <input type="password" id="inputPassword" class="form-control" placeholder="密码" required name="customer.password">
+                   <div class="checkbox">
+                      <label>
+                        <input type="checkbox" value="remember-me"> 记住我
+                      </label>
+                      <span style="margin:0 100px">error</span>
+                   </div>
+                   <button id="ajaxLogin" class="btn btn-lg btn-primary btn-block" type="button">登录</button>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
     
     
     <div class="wrapper">
@@ -103,12 +133,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    					<li class="roomtype-selected">
 		    						<a href="javascript:void(0)">${room.type}</a>
 		    						<span class="roomId">${room.id}</span>
+		    						<span class="roomPrice">${room.price}</span>
 		    					</li>
 		    				</c:when> 
 		    				<c:otherwise>
 		    					<li>
 		    						<a href="javascript:void(0)" >${room.type}</a>
 		    						<span class="roomId">${room.id}</span>
+		    						<span class="roomPrice">${room.price}</span>
 		    					</li>
 		    				</c:otherwise>
 		    					
@@ -118,7 +150,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 				<div class="orderInfo">
 					<h3>预订信息</h3>
-					<form id="hotel-orderForm">
+					<form id="hotel-orderForm" action="order/orderAction">
 					<ul>
 						<c:choose>
 						<c:when test="${sessionScope.loginCustomer!=null}">
@@ -153,7 +185,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</li>
 						<li>
 							<label>数量</label>
-							<select id="num" name="num">
+							<select id="num">
 								<option>1间</option>
 								<option>2间</option>
 								<option>3间</option>
@@ -168,6 +200,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</li>
 						<li class="hidden">
 							<input type="text" id="hotelId" name="hotelId" value="${hotel.id}"/>
+							<input type="text" id="roomId" name="roomId" />
+							<input type="text" id="days" name="days" />
+							<input type="text" id="back-num" name="num"/>
 						</li>
 						
 					</ul>
@@ -334,6 +369,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   		//初始化价格
 	   		(function(){
 	   			var l = $(".roomtype-ul li").length;
+	   			
+	   			
 	   			for(var i=0;i<l;i++){
 	   				$(".roomtype-ul li:eq('"+i+"')").data("price",i*100+99);
 	   			}
@@ -383,11 +420,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    				//修改天数
    				
    				var days = $(".date-roomtype .selected").length;
-   				var unit_price = $(".roomtype-selected").data("price");
+   				//var unit_price = $(".roomtype-selected").data("price");
+   				var unit_price = $(".roomtype-selected .roomPrice").text();
    				var num = $("#num").val().substr(0,1);
    				$("#date-num").val(days+"天");
    				//修改金额
    				$("#price").val("￥"+unit_price*days*num);
+   				//$("#price").val();
    			});
    			//房间类型导航
    			$(".roomtype-ul").delegate("li","click",function(e){
