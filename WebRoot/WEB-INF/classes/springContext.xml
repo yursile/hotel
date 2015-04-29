@@ -25,7 +25,7 @@
     			<entry key="hibernate.show_sql" value="true"></entry>
     			<entry key="hibernate.format_sql" value="true"></entry>
    				 <!--<entry key="hibernate.hbm2ddl.auto" value="create"></entry>-->
-    			 <entry key="hibernate.hbm2ddl.auto" value="create"></entry>
+    			 <entry key="hibernate.hbm2ddl.auto" value="update"></entry>
     		</map>
     	</property>
     	<property name="mappingResources">
@@ -89,6 +89,11 @@
     </bean>
     
     <bean id="orderAction" class="com.hotel.action.OrderAction" scope="prototype">
+     	<property name="orderService" ref="orderService"></property>
+     	<property name="hotelService" ref="hotelService"></property>
+    </bean>
+    
+    <bean id="checkOrderAction" class="com.hotel.action.CheckOrderAction" scope="prototype">
      	<property name="orderService" ref="orderService"></property>
     </bean>
    

@@ -53,12 +53,39 @@ public class HotelUtil {
 	}
 	
 	
+	public static List<String> formatFLday(String day){
+		List<String> list = new ArrayList<String>();
+		
+		String[] days = day.split(",");
+		int[] a = new int[days.length];
+		for(int i = 0;i<days.length;i++){
+			a[i] = Integer.parseInt(days[i]);
+		}
+		int[] s1 = null;
+		 int n =0;
+		 for(int i = 1;i<days.length;i++){
+		 	if(a[i]-a[i-1]==1){
+		 		n++;
+		 	}else{
+		 		s1 = new int[2];
+		 		s1[0] = a[i-n-1];
+		 		s1[1] = a[i-1];
+		 		list.add(""+s1[0]+"-"+s1[1]);
+		 		n=0;
+		 	}
+		 }
+		 s1 = new int[2];	
+		   s1[0] = a[days.length-n-1];
+	 		s1[1] = a[days.length-1];
+		   
+		   list.add(""+s1[0]+"-"+s1[1]);
+		return list;
+	}
 	public static void main(String[] args) {
 		String a = new String("01,02,05,06,08");
 		String b = new String("20150402,20150408,20150409");
 		String c = new String("02,08,09");
-		
-		List<int[]> list = formatDay(b);
+		List<String> list = formatFLday(a);
 		System.out.println(list.size());
 		//getNowDay();
 	}

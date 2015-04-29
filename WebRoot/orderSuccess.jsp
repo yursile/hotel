@@ -154,7 +154,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<div class="center">
     	
 	    	<h2 class="hotelName">7天连锁酒店 （${hotelName}）</h2>
-	    	<time class="successTime">2015/04/27 - 2015/04/28</time>
+	    	
+	    	<c:forEach items="${dayList}" var="day">
+	    			<time class="successTime">${day}</time>
+	    	</c:forEach>
 	    	<figure class="orderSuccess">
 	    		<img src="pic/order-success.png" alt="预订成功"/>
 	    		<figcaption>预订成功！</figcaption>
@@ -162,8 +165,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	
 	    	<div class="control">
 	    		<p style="margin-bottom:20px;">铂涛会提供储值、抵用券、信用卡、微信支付等多种在线支付方式。</p>
-	    		<a class="success-btn" href="javascript:void(0)">查看订单</a>
-	    		<a class="success-btn" href="javascript:void(0)">返回首页</a>
+	    		<a class="success-btn" href="javascript:void(0)" id="checkOrder">查看订单</a>
+	    		<a class="success-btn" href="javascript:void(0)" id="returnMain">返回首页</a>
 	    	</div>
     		
     		<p class="tips">
@@ -171,6 +174,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		</p>
     	</div>
     </div>
+    
+    <script>
+    	$("#checkOrder").click(function(){
+    		
+    	});
+    </script>
    
   </body>
   

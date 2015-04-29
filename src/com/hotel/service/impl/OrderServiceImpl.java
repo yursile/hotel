@@ -1,5 +1,6 @@
 package com.hotel.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.hotel.dao.OrderDAO;
@@ -24,17 +25,19 @@ public class OrderServiceImpl implements OrderService{
 		return roomRemainService;
 	}
 
-
-
 	public void setRoomRemainService(RoomRemainService roomRemainService) {
 		this.roomRemainService = roomRemainService;
 	}
 
 
-
 	@Override
 	public List<Order> findOrderByCustomerId(long customerId) {
-		return orderDAO.findOrderByCustomerId(customerId);
+		try {
+			return orderDAO.findOrderByCustomerId(customerId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	
@@ -53,9 +56,11 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public void saveOrder(Order order,String day) {
-		
-		
-		orderDAO.saveOrder(order);
+		try {
+			orderDAO.saveOrder(order);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public OrderDAO getOrderDAO() {
@@ -80,7 +85,7 @@ public class OrderServiceImpl implements OrderService{
 			int departureDate = group[group.length-1];
 			Order order = new Order();
 			
-			for(int i=arriveDate;i<departureDate;i++){
+			for(int i=arriveDate;i<=departureDate;i++){
 				RoomRemain rr = roomRemainService.findRoomRemain(i, room);
 				rr.setRemain(rr.getRemain()-1);
 			}
@@ -94,8 +99,11 @@ public class OrderServiceImpl implements OrderService{
 			order.setGenerateTime(generateTime);
 			order.setStatus(1);
 			order.setCustomer(customer);
-			orderDAO.saveOrder(order);
-			
+			try {
+				orderDAO.saveOrder(order);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -106,5 +114,51 @@ public class OrderServiceImpl implements OrderService{
 
 	public void setRoomService(RoomService roomService) {
 		this.roomService = roomService;
+	}
+
+
+
+	@Override
+	public List<Order> findOrder(long customerId, int startTime, int endTime,
+			int orderStatus) {
+		List<Order> orders;
+		try {
+			if(startTime==0&&endTime==0&&orderStatus==0){
+				orders = orderDAO.findOrderByCustomerId(customerId);
+			}else if(startTime==0&&endTime==0&&orderStatus!=0){
+				orders = orderDAO.findOrderByStauts("from Order o where o.customer.id=? and o.status =?", customerId, orderStatus);
+			}else if(startTime==0&&endTime!=0&&orderStatus!=0){
+				orders = orderDAO.findOrder("from Order o where o.customer.id=? and o.departrueDate<=? and o.status=?", customerId, endTime, orderStatus);
+			}else if(startTime==0&&endTime!=0&&orderStatus==0){
+				orders = orderDAO.findOrderByTime("from Order o where o.customer.id=? and o.departrueDate<=?", customerId, endTime);
+			}else if(startTime!=0&&endTime==0&&orderStatus==0){
+				orders = orderDAO.findOrderByTime("from Order o where o.customer.id=? and o.arriveDate>=?", customerId, startTime);
+			}else if(startTime!=0&&endTime==0&&orderStatus!=0){
+				orders = orderDAO.findOrder("from Order o where o.customer.id=? and o.arriveDate=? and o.stauts=?", customerId, startTime,orderStatus);
+			}else if(startTime!=0&&endTime!=0&&orderStatus==0){
+				orders = orderDAO.findOrderByTimes("from Order o where o.customer.id=? and o.arriveDate>=? and o.departrueDate<=?", customerId, startTime, endTime);
+			}else{
+				orders = orderDAO.findOrder("from Order o where o.customer.id=? and o.arriveDate>=? and o.departrueDate<=? and o.status = ?", customerId, startTime, endTime, orderStatus);
+			}
+			return orders;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+
+	@Override
+	public List<Order> findOrderByOrderId(long customerId,long orderId) {
+		List<Order> orders = new ArrayList<Order>();
+		try {
+			Order order = orderDAO.findOrderByOrderId("from Order o where o.customer.id=? and o.id =?", customerId, orderId);
+			orders.add(order);
+			return orders;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">我的yursile <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">订单查询</a></li>
+                    <li><a href="order/checkOrderAction">订单查询</a></li>
                     <li><a href="info.jsp">个人资料</a></li>
                   </ul>
                  </li>

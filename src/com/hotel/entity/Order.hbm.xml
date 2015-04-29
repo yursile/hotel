@@ -6,7 +6,6 @@
 		<id name="id" type="long"><!-- id元素用来定义主键标识,并指定主键生成策略 -->
 			<generator class="native" />
 		</id>
-		<many-to-one name="hotel" class="Hotel" cascade="save-update" column="hotel_id" lazy="false"></many-to-one>
 		<many-to-one name="customer" cascade="save-update" class="Customer" column="customer_id" lazy="false"></many-to-one>
 		<property name="arriveDate"></property>
 		<property name="departureDate"></property>

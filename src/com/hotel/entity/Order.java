@@ -2,7 +2,6 @@ package com.hotel.entity;
 
 public class Order {
 	private long id;
-	private Hotel hotel;
 	private Customer customer;
 	private int arriveDate;
 	private int departureDate;
@@ -47,12 +46,6 @@ public class Order {
 	}
 	public void setStatus(int status) {
 		this.status = status;
-	}
-	public Hotel getHotel() {
-		return hotel;
-	}
-	public void setHotel(Hotel hotel) {
-		this.hotel = hotel;
 	}
 	public int getArriveDate() {
 		return arriveDate;

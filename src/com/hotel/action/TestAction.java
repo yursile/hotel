@@ -31,7 +31,6 @@ public class TestAction {
 		hotel.setName("酒店");
 		hotel.setRooms(rooms);
 		
-		order.setHotel(hotel);
 		order.setRoom(room2);
 		order.setCustomer(customer);
 		//orderService.saveOrder(order);

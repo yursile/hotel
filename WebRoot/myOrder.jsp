@@ -225,6 +225,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach items = "${orders }" var="order">
+						<tr>
+							<td><a class="orderId" href="javascript:void(0)">${order.id}</a></td>
+							<td>${order.generateTime}</td>
+							<td><a class="hotelName" href="javascript:void(0)">${order.room.hotel.name}</a></td>
+							<td>
+								<time>${order.arriveDate}</time>
+								<time>${order.departureDate}</time>
+							</td>
+							<td class="price-td">￥${order.price}</td>
+							<c:choose>
+								<c:when test="${order.status}">
+								</c:when>
+							</c:choose>
+							<td>预订有效</td>
+							<td>
+								<a class="op" href="javascript:void(0)" title="取消">取消</a>
+								<a class="op" href="javascript:void(0)" title="修改">修改</a>
+							</td>
+						</tr>
+					</c:forEach>
+					
 					<tr>
 						<td><a class="orderId" href="javascript:void(0)">7896</a></td>
 						<td>2015-04-09</td>

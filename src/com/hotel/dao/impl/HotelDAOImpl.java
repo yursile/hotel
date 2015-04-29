@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
@@ -12,7 +11,6 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.hotel.dao.HotelDAO;
 import com.hotel.entity.Hotel;
-import com.hotel.entity.Order;
 
 public class HotelDAOImpl extends HibernateDaoSupport implements HotelDAO {
 
@@ -36,6 +34,7 @@ public class HotelDAOImpl extends HibernateDaoSupport implements HotelDAO {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Hotel> findHotels(final String hql,final String city) {
 		return (List<Hotel>)this.getHibernateTemplate().execute(new HibernateCallback() {
@@ -47,6 +46,7 @@ public class HotelDAOImpl extends HibernateDaoSupport implements HotelDAO {
 		});
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Hotel> findHotels(final String hql,final String city, final String district) {
 		return (List<Hotel>)this.getHibernateTemplate().execute(new HibernateCallback() {
@@ -58,6 +58,7 @@ public class HotelDAOImpl extends HibernateDaoSupport implements HotelDAO {
 		});
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Hotel> findHotels(final String hql,final String city, final int arriveDate,
 			final int departureDate) {
