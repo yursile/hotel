@@ -8,9 +8,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML>
 <html xml:lang="zh-CN">
  <head>
+ 	<base href="<%=basePath%>">
  	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 	<title>个人中心—个人中心—铂涛会</title>
- 		  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+ 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="bootstrap/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -40,12 +41,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse" style="float: left">
             <ul class="nav navbar-nav">
               <li><a href="#">首页</a></li>
-                <li><a href="#about">预订</a></li>
+                <li ><a href="hotel/toOrderAction.action">预订</a></li>
                 <li><a href="#about">企业差旅</a></li>
                 <li><a href="#contact">关于yursile</a></li>
             </ul>
@@ -54,11 +54,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
            <div class="navbar-collapse collapse" style="float: right">
               <ul class="nav navbar-nav">
-                  <li class="dropdown">
+                  <li class="dropdown active">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">我的yursile <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">订单查询</a></li>
-                    <li ><a href="info.jsp">个人资料</a></li>
+                 <ul class="dropdown-menu" style="min-width:160px;font-size: 14px;" role="menu">
+                    <li style="display:block"><a style="padding:3px 20px" id="checkOrder" href="javascript:void(0)">订单查询</a></li>
+                    <li style="display:block"><a style="padding:3px 20px" id="info" href="javascript:void(0)">个人资料</a></li>
                   </ul>
                  </li>
                  <li id="logexit"><a data-toggle="modal" href="#loginForm">
@@ -79,16 +79,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div><!-- nav结束 -->
     
 	<div class="container" style="margin-top:100px;width:1000px" >
-		<form id="filterOrderForm">
+		<form id="filterOrderForm" action="order/checkOrderAction" method="post">
 			<ul id="filterBox">
 				<li>
 					<label>订单号</label>
-					<input type="text" class="ipt" name="id"/>
+					<input type="text" class="ipt" name="orderId"/>
 				</li>
 				<li style="position:relative">
 					<label>预订日期</label>
 					<div class="dropdown_modal">
-						<input type="text" class="ipt" name="start" placeholder="开始日期" id="start"/>
+						<c:choose>
+							<c:when test="${endTime==0}">
+								<input type="text" class="ipt" placeholder="开始日期" id="start"/>
+							</c:when>
+							<c:otherwise>
+								<input type="text" class="ipt" placeholder="开始日期" id="start" value="${startTime }"/>
+							</c:otherwise>
+						</c:choose>
+						
 						<div id="modal_arr" class="modal_bd">
 	    					<div class="date-header">
 		    					<a class="ico ico-pre fl" href="javascript:void(0)"></a>
@@ -139,7 +147,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<li style="position:relative">
 					<label>到</label>
 					<div class="dropdown_modal">
-					<input id ="end" type="text" class="ipt" name="end" placeholder="结束日期"/>
+					<c:choose>
+						<c:when test="${endTime==0}">
+							<input id ="end" type="text" class="ipt" placeholder="结束日期"/>
+						</c:when>
+						<c:otherwise>
+							<input id ="end" type="text" class="ipt" placeholder="结束日期" value="${endTime }"/>
+						</c:otherwise>
+					</c:choose>
+					
 						<div id="modal_arr" class="modal_bd">
 	    					<div class="date-header">
 		    					<a class="ico ico-pre fl" href="javascript:void(0)"></a>
@@ -189,16 +205,65 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</li>
 				<li>
 					<label>订单状态</label>
-					<select class="ipt"style="width:85px">
-						<option>全部</option>
-						<option>预订</option>
-						<option>取消</option>
-						<option>预订未到</option>
-						<option>在住</option>
-						<option>离店</option>
+					<select class="ipt"style="width:85px" id="front-status">
+						<c:choose>
+							<c:when test="${orderStatus ==0||orderStatus==null}">
+								<option selected="true">全部</option>
+								<option>预订</option>
+								<option>取消</option>
+								<option>预订未到</option>
+								<option>在住</option>
+								<option>离店</option>
+							</c:when>
+							<c:when test="${orderStatus ==1}">
+								<option >全部</option>
+								<option selected="true">预订</option>
+								<option>取消</option>
+								<option>预订未到</option>
+								<option>在住</option>
+								<option>离店</option>
+							</c:when>
+							<c:when test="${orderStatus ==2}">
+								<option >全部</option>
+								<option >预订</option>
+								<option selected="true">取消</option>
+								<option>预订未到</option>
+								<option>在住</option>
+								<option>离店</option>
+							</c:when>
+							<c:when test="${orderStatus ==3}">
+								<option >全部</option>
+								<option >预订</option>
+								<option >取消</option>
+								<option selected="true">预订未到</option>
+								<option>在住</option>
+								<option>离店</option>
+							</c:when>
+							<c:when test="${orderStatus ==4}">
+								<option >全部</option>
+								<option >预订</option>
+								<option >取消</option>
+								<option >预订未到</option>
+								<option selected="true">在住</option>
+								<option>离店</option>
+							</c:when>
+							<c:when test="${orderStatus ==5}">
+								<option >全部</option>
+								<option >预订</option>
+								<option>取消</option>
+								<option>预订未到</option>
+								<option>在住</option>
+								<option selected="true">离店</option>
+							</c:when>
+						</c:choose>
 					</select>
 				</li>
 				<li><input type="button" value="查询" class="search-btn" id="searchSub"/></li>
+				<li style="display:none">
+					<input type="text" id="orderStatus" name="orderStatus"/>
+					<input type="text" id="startTime" name="startTime"/>
+					<input type="text" id="endTime" name="endTime"/>
+				</li>
 			</ul>
 		</form>
 		
@@ -229,17 +294,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<tr>
 							<td><a class="orderId" href="javascript:void(0)">${order.id}</a></td>
 							<td>${order.generateTime}</td>
-							<td><a class="hotelName" href="javascript:void(0)">${order.room.hotel.name}</a></td>
+							<td><a class="hotelName" href="javascript:void(0)" data-hotelId="${order.room.hotel.id}">${order.room.hotel.name}</a></td>
 							<td>
 								<time>${order.arriveDate}</time>
 								<time>${order.departureDate}</time>
 							</td>
 							<td class="price-td">￥${order.price}</td>
 							<c:choose>
-								<c:when test="${order.status}">
+								<c:when test="${order.status==1}">
+									<td>预订有效</td>
 								</c:when>
 							</c:choose>
-							<td>预订有效</td>
+							
 							<td>
 								<a class="op" href="javascript:void(0)" title="取消">取消</a>
 								<a class="op" href="javascript:void(0)" title="修改">修改</a>
@@ -260,21 +326,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td>
 							<a class="op" href="javascript:void(0)" title="取消">取消</a>
 							<a class="op" href="javascript:void(0)" title="修改">修改</a>
-						</td>
-					</tr>
-					<tr>
-						<td><a href="javascript:void(0)">7896</a></td>
-						<td>2015-04-09</td>
-						<td><a href="javascript:void(0)">重庆北碚轻轨总站西南大学店</a></td>
-						<td>
-							<time>2015-04-09</time>
-							<time>2015-04-10</time>
-						</td>
-						<td class="price-td">￥165</td>
-						<td>预订有效</td>
-						<td>
-							<a href="javascript:void(0)" title="取消">取消</a>
-							<a href="javascript:void(0)" title="修改">修改</a>
 						</td>
 					</tr>
 				</tbody>
@@ -317,7 +368,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		}
   		var year = date.substring(0,date.indexOf("年"));
 		var month = date.substring(date.indexOf("年")+1,date.indexOf("月"));
- 		$(this).parents(".dropdown_modal").children("input").val(year+"/"+month+"/"+$(e.target).text());
+		var day = $(e.target).text();
+ 		$(this).parents(".dropdown_modal").children("input").val(year+"/"+month+"/"+day);
+ 		
+ 		
+ 		var formatMonth = (month.length==2)?month:"0"+month;
+ 		var formatDay = (day.length==2)?day:"0"+day;
+ 		
+ 		//格式化提交到后台的数据
+ 		if($(e.target).parents(".modal_bd").prev().attr("id")=="start"){
+ 			$("#startTime").val(year+formatMonth+formatDay);
+ 		}else{
+ 			$("#endTime").val(year+formatMonth+formatDay);
+ 		}
   	});
   	
   	$(".ico-pre").click(function(e){
@@ -346,6 +409,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$(".date-title.fr").text(year+"年"+(month+2)+"月");
 		createCalendar(".date-bd-l tbody",year,month+1);
 		createCalendar(".date-bd-r tbody",year,month+2);
+		
+		
+		//$("#start").val();
   	});
   	
   	$("#end").click(function(){
@@ -393,13 +459,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		
    		
    		
-   		
-   		
    		$("#searchSub").click(function(){
-   			$.get("",$("#filterOrderForm").serialize(),function(){
-   				
-   			});
+   			var status = $("#front-status").val();
+   			var backStatus = 0;
+   			switch(status){
+   				case "全部":backStatus = 0;break;
+   				case "预订":backStatus = 1;break;
+   				case "取消":backStatus = 2;break;
+   				case "预订未到":backStatus = 3;break;
+   				case "在住":backStatus = 4;break;
+   				case "离店":backStatus = 5;break;
+   			}
+   			$("#orderStatus").val(backStatus);
+   			$("#filterOrderForm").submit();
    		});
+   		
+   		$(".hotelName").click(function(){
+   			var hotelId = $(this).attr("data-hotelId");
+   			document.location.href = "hotel/hotelInfoAction?hotelId="+hotelId;
+   		});
+   		
+   		$("#checkOrder").click(function(){
+    		document.location.href="order/checkOrderAction";
+    	});
+    	
+    	$("#info").click(function(){
+    		document.location.href="toInfoAction";
+    	});
 	</script>
  </body>
 </html>

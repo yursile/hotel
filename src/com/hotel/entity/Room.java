@@ -9,6 +9,8 @@ public class Room {
 	private int num;
 	private Pic picture;
 	private Set<RoomRemain> roomRemains;
+	private Hotel hotel;
+	
 	public Pic getPicture() {
 		return picture;
 	}
@@ -46,5 +48,11 @@ public class Room {
 	}
 	public void setRoomRemains(Set<RoomRemain> roomRemains) {
 		this.roomRemains = roomRemains;
+	}
+	public Hotel getHotel() {
+		return hotel;
+	}
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
 	}
 }

@@ -128,17 +128,17 @@ public class OrderServiceImpl implements OrderService{
 			}else if(startTime==0&&endTime==0&&orderStatus!=0){
 				orders = orderDAO.findOrderByStauts("from Order o where o.customer.id=? and o.status =?", customerId, orderStatus);
 			}else if(startTime==0&&endTime!=0&&orderStatus!=0){
-				orders = orderDAO.findOrder("from Order o where o.customer.id=? and o.departrueDate<=? and o.status=?", customerId, endTime, orderStatus);
+				orders = orderDAO.findOrder("from Order o where o.customer.id=? and o.departureDate<=? and o.status=?", customerId, endTime, orderStatus);
 			}else if(startTime==0&&endTime!=0&&orderStatus==0){
-				orders = orderDAO.findOrderByTime("from Order o where o.customer.id=? and o.departrueDate<=?", customerId, endTime);
+				orders = orderDAO.findOrderByTime("from Order o where o.customer.id=? and o.departureDate<=?", customerId, endTime);
 			}else if(startTime!=0&&endTime==0&&orderStatus==0){
 				orders = orderDAO.findOrderByTime("from Order o where o.customer.id=? and o.arriveDate>=?", customerId, startTime);
 			}else if(startTime!=0&&endTime==0&&orderStatus!=0){
 				orders = orderDAO.findOrder("from Order o where o.customer.id=? and o.arriveDate=? and o.stauts=?", customerId, startTime,orderStatus);
 			}else if(startTime!=0&&endTime!=0&&orderStatus==0){
-				orders = orderDAO.findOrderByTimes("from Order o where o.customer.id=? and o.arriveDate>=? and o.departrueDate<=?", customerId, startTime, endTime);
+				orders = orderDAO.findOrderByTimes("from Order o where o.customer.id=? and o.arriveDate>=? and o.departureDate<=?", customerId, startTime, endTime);
 			}else{
-				orders = orderDAO.findOrder("from Order o where o.customer.id=? and o.arriveDate>=? and o.departrueDate<=? and o.status = ?", customerId, startTime, endTime, orderStatus);
+				orders = orderDAO.findOrder("from Order o where o.customer.id=? and o.arriveDate>=? and o.departureDate<=? and o.status = ?", customerId, startTime, endTime, orderStatus);
 			}
 			return orders;
 		} catch (Exception e) {

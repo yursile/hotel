@@ -79,7 +79,4 @@ public class CheckOrderAction extends BaseAction{
 	public void setOrderStatus(int orderStatus) {
 		this.orderStatus = orderStatus;
 	}
-
-	
-	
 }

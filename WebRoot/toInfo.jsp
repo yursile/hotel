@@ -89,6 +89,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		.changePhone_tb input{
 			margin-left:20px;
 		}
+		.errorInfo{
+			text-align:center;
+			color:red;
+		}
+		.changePassResult{
+			
+		}
 		
     </style>
 </head>
@@ -105,25 +112,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse" style="float: left">
             <ul class="nav navbar-nav">
-              <li><a href="#">首页</a></li>
-                <li><a href="#about">预订</a></li>
+              <li ><a href="#">首页</a></li>
+                <li><a href="hotel/toOrderAction.action">预订</a></li>
                 <li><a href="#about">企业差旅</a></li>
-                <li><a href="#contact">关于yursile</a></li>
+                <li ><a href="#contact">关于yursile</a></li>
             </ul>
            
           </div><!--/.nav-collapse -->
           
            <div class="navbar-collapse collapse" style="float: right">
               <ul class="nav navbar-nav">
-                  <li class="dropdown">
+                  <li  class="dropdown active">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">我的yursile <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">订单查询</a></li>
-                    <li ><a href="info.jsp">个人资料</a></li>
+                    <li><a id="checkOrder" href="javascript:void(0)">订单查询</a></li>
+                    <li><a id="info" href="javascript:void(0)">个人资料</a></li>
                   </ul>
                  </li>
                  <li id="logexit"><a data-toggle="modal" href="#loginForm">
@@ -155,24 +161,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<tbody>
 					<tr>
 						<th >用户名</th>
-						<td >杨灿</td>
+						<td >${sessionScope.loginCustomer.name}</td>
 					</tr>
 					<tr>
 						<th>证件号码</th>
-						<td>身份证     5****************7</td>
+						<td>身份证    ${sessionScope.loginCustomer.IDCard}</td>
 					</tr>
 					<tr>
 						<th>生日</th>
-						<td>1992/10/19</td>
+						<td>${sessionScope.loginCustomer.birthday}</td>
 					</tr>
 					<tr>
 						<th>手机号码</th>
-						<td>185****8939<a class="change-btn"  data-toggle="modal" href="#changePhoneForm">修改手机</a></td>
+						<td>${sessionScope.loginCustomer.phone}<a class="change-btn"  data-toggle="modal" href="#changePhoneDiv">修改手机</a></td>
 					</tr>
 				</tbody>
 			</table>
 			
-			<div class="modal fade" id="changePhoneForm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+			<div class="modal fade" id="changePhoneDiv" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 		        <div class="modal-dialog" style="width:400px">
 		            <div class="modal-content">
 		                <div class="modal-header">
@@ -184,63 +190,63 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                </div>
 		                <div class="modal-body">
 		                <span>修改手机号需先验证旧手机号码：请点击“获取验证码”，验证码将发送至您的旧手机号码，填写验证码后点击“下一步”，进入新手机验证。</span>
-		                <form method="get" action="user/login" name="loginForm" id="loginForm">
+		                <form method="post" action="user/toChangePhone" name="toChangePhoneForm" id="toChangePhoneForm">
 		               		<table class="changePhone_tb">
 		               			<tbody>
 		               				<tr>
-		               					<th colspan="70px">  <label  for="userName" >原号码</label></th>
-		               					<td>  <input  id="userName" class="form-control" style="display:inline-block;width:210px"placeholder="原手机号码" required autofocus name="customer.phone"></td>
+		               					<th colspan="70px">  <label  for="phone" >原号码</label></th>
+		               					<td>  <input  id="phone" class="form-control" style="display:inline-block;width:210px"placeholder="原手机号码" required autofocus name="customer.phone"></td>
 		               				</tr>
 		               				<tr>
-		               					<th colspan="70px"><label  for="inputPassword">新号码</label></th>
+		               					<th colspan="70px"><label  for="inputPassword">密码</label></th>
 		               					<td> <input type="password" id="inputPassword" style="display:inline-block;width:210px" class="form-control" placeholder="密码" required name="customer.password"></td>
 		               				</tr>
 		               				<tr>
 		               					<th colspan="70px"><label  for="code">验证码</label></th>
-		               					<td> <input type="password" id="code" class="form-control" style="width:90px;display:inline-block" placeholder="验证码码" required name="customer.password"> <a class="change-btn">获取验证码</a></td>
-		               					
+		               					<td> <input type="text" id="code" class="form-control" style="width:90px;display:inline-block" placeholder="验证码码" required name="code"> <a class="change-btn">获取验证码</a></td>
 		               				</tr>
 		               			</tbody>
 		               		</table>
-		                 
-		                  
-		                   
-		                  
-		                   
-		                  
-		                   <button id="ajaxLogin" class="btn btn-lg btn-primary btn-block" style="margin-top:10px" type="button">修改</button>
+		                   <button id="toChangePhoneBtn" class="btn btn-lg btn-primary btn-block" style="margin-top:10px" type="button">下一步</button>
 		                    </form>
 		                </div>
-		                
 		            </div>
 		        </div>
 		    </div>
 			
 			
-			<form action="user_changepassword.action">
+			<form action="user/changepassword.action" id="changePasswordForm">
 				<table class="pas-tb info_tb">
 					<thead><tr><th colspan="100%"><a class="resetpas">重置密码</a></th></tr></thead>
 					<tbody>
 						<tr>
 							<th >原始密码</th>
-							<td ><input type="text" name="oldpass"/></td>
+							<td ><input type="password" name="oldPass"/></td>
 						</tr>
 						<tr>
 							<th>新密码</th>
-							<td><input type="text" name="newpass"/></td>
+							<td><input type="password" name="newPass"/></td>
 						</tr>
 						<tr>
 							<th>确认新密码</th>
-							<td><input type="text"/></td>
+							<td><input type="password"/></td>
 						</tr>
 						<tr>
-							<td colspan="100%" style="text-align:center"><a class="change-btn">提交</a></td>
+							<td colspan="100%" style="text-align:center"><a id="changPasswordBtn" class="change-btn">提交</a></td>
 						</tr>
-						
 					</tbody>
 				</table>
 			</form>
 			
+			<div class="modal fade" id="changePassResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			   <div class="modal-dialog">
+			      <div class="modal-content">
+			         <div class="modal-body">
+			         	<h4 class="changePassResult"></h4>
+			         </div>
+			      </div><!-- /.modal-content -->
+				</div><!-- /.modal -->
+			</div>
 		</div>
 	</div>
 
@@ -253,10 +259,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>
     <script src="jquery-ui.min.js"></script>
+    
+    <script src="js/toInfo.js"></script>
+    <script src="js/ajax_log.js"></script>
 	<script>
 		$(".resetpas").click(function(){
 			$(".pas-tb tbody").toggle();
 		});
+		
+		$("#checkOrder").click(function(){
+    		document.location.href="order/checkOrderAction";
+    	});
+    	
+    	$("#info").click(function(){
+    		document.location.href="toInfoAction";
+    	});
 	</script>
  </body>
 </html>

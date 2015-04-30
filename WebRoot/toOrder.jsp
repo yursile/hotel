@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div id="navbar" class="navbar-collapse collapse" style="float: left">
             <ul class="nav navbar-nav">
               <li ><a href="index.jsp">首页</a></li>
-                <li class="active"><a href="#about">预订</a></li>
+                <li class="active"><a  href="hotel/toOrderAction.action">预订</a></li>
                 <li><a href="#about">企业差旅</a></li>
                 <li><a href="#contact">关于yursile</a></li>
             </ul>
@@ -68,8 +68,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">我的yursile <span class="caret"></span></a>
                   <ul class="dropdown-menu" style="min-width:160px;font-size: 14px;" role="menu">
-                    <li style="display:block"><a style="padding:3px 20px" href="#">订单查询</a></li>
-                    <li style="display:block"><a style="padding:3px 20px" href="info.jsp">个人资料</a></li>
+                    <li style="display:block"><a style="padding:3px 20px" id="checkOrder" href="javascript:void(0)">订单查询</a></li>
+                    <li style="display:block"><a style="padding:3px 20px" id="info" href="javascript:void(0)">个人资料</a></li>
                   </ul>
                  </li>
                  <li id="logexit"><a data-toggle="modal" href="#loginForm">
@@ -645,5 +645,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 }
 			 return results;
 		}
+		
+		$("#checkOrder").click(function(){
+    		document.location.href="order/checkOrderAction";
+    	});
+    	
+    	$("#info").click(function(){
+    		document.location.href="toInfoAction";
+    	});
   </script>
 </html>

@@ -17,7 +17,6 @@ public class AjaxAction extends BaseAction{
 	private String result;
 	public String login(){
 		try {
-			
 			Customer loginCustomer = userService.login(customer);
 			if(loginCustomer!=null){
 				session.put("loginCustomer", loginCustomer);
@@ -37,7 +36,17 @@ public class AjaxAction extends BaseAction{
 			e.printStackTrace();
 			return "login";
 		}
-		
+	}
+	
+	public String exit(){
+		customer = (Customer) session.get("loginCustomer");
+		if(customer!=null){
+			session.remove("loginCustomer");
+			setResult("success");
+		}else{
+			setResult("您已经退出");
+		}
+		return "exit";
 	}
 	
 	public UserService getUserService() {

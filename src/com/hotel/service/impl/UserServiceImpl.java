@@ -2,7 +2,6 @@ package com.hotel.service.impl;
 
 import java.sql.SQLException;
 
-import com.hotel.dao.CommonDAO;
 import com.hotel.dao.UserDAO;
 import com.hotel.entity.Customer;
 import com.hotel.exception.ServException;
@@ -37,8 +36,11 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void updateInf(Customer customer) throws ServException {
-		// TODO Auto-generated method stub
-		
+		try {
+			userDAO.updateCustomer(customer);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -50,11 +52,23 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void regist(Customer customer) throws ServException {
 		try {
+			//customer.setBirthday(customer.getIDCard().substring(6));
+			customer.setType("0");
 			userDAO.addCustomer(customer);
 		} catch (SQLException e) {
 			throw new ServException("注册失败");
 		}
 		
+	}
+
+	@Override
+	public Customer findCustomer(String phone,String password) throws ServException {
+		try {
+			return userDAO.findCustomer(phone, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

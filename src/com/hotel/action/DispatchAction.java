@@ -6,6 +6,10 @@ import com.hotel.entity.Hotel;
 import com.hotel.service.HotelService;
 
 public class DispatchAction extends BaseAction{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private HotelService hotelService;
 	private List<Hotel> hotels;
 	
@@ -13,6 +17,11 @@ public class DispatchAction extends BaseAction{
 		hotels = hotelService.findHotels("重庆");
 		return "toOrder";
 	}
+	
+	public String toInfo(){
+		return "toInfo";
+	}
+	
 
 	public HotelService getHotelService() {
 		return hotelService;

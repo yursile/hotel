@@ -51,12 +51,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse" style="float: left">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">首页</a></li>
-                <li><a href="#about">预订</a></li>
+              <li ><a href="#">首页</a></li>
+                 <li class="active"><a href="hotel/toOrderAction.action">预订</a></li>
                 <li><a href="#about">企业差旅</a></li>
                 <li><a href="#contact">关于yursile</a></li>
             </ul>
@@ -68,8 +67,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">我的yursile <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">订单查询</a></li>
-                    <li><a href="#">个人资料</a></li>
+                    <li><a id="checkOrder" href="javascript:void(0)">订单查询</a></li>
+                    <li><a id="info" href="javascript:void(0)">个人资料</a></li>
                   </ul>
                  </li>
                  <li id="logexit"><a data-toggle="modal" href="#loginForm">
@@ -122,7 +121,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <div class="wrapper">
 	    <div class="container" style="margin-top:60px">
-	    	<h1>重庆沙坪坝店${sessionScope.arriveDate}</h1>
+	    	<h1>${hotel.name}</h1>
 	    	
 	    	<div class="roomtype-box">
 	    		<ul class="roomtype-ul">
@@ -143,7 +142,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    						<span class="roomPrice">${room.price}</span>
 		    					</li>
 		    				</c:otherwise>
-		    					
 		    			</c:choose>
 	    			</c:forEach>
 	    		</ul>
@@ -473,7 +471,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			
    		});
    		
-   		
+   		$("#checkOrder").click(function(){
+    		document.location.href="order/checkOrderAction";
+    	});
+    	
+    	$("#info").click(function(){
+    		document.location.href="toInfoAction";
+    	});
    	</script>
    	<script src="js/hotelInfo.js"></script>
 </html>

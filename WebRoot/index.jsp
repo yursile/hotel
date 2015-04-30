@@ -49,7 +49,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse" style="float: left">
             <ul class="nav navbar-nav">
@@ -66,17 +65,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">我的yursile <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="order/checkOrderAction">订单查询</a></li>
-                    <li><a href="info.jsp">个人资料</a></li>
+                    <li><a id="checkOrder" href="javascript:void(0)">订单查询</a></li>
+                    <li><a id="info" href="javascript:void(0)">个人资料</a></li>
                   </ul>
                  </li>
-                 <li id="logexit"><a data-toggle="modal" href="#loginForm">
-                 	<c:choose>
-                 		<c:when test="${sessionScope.loginCustomer.name!=null}">退出</c:when>
-                 		<c:otherwise>登录</c:otherwise>
-                 	</c:choose>
-                 	
-                 </a></li>
+	             
+	             <c:choose>
+               		<c:when test="${sessionScope.loginCustomer.name!=null}">
+               			<li id="log" style="display:none"><a data-toggle="modal" href="#logDiv">登录</a></li>
+               			<li id="exit" ><a data-toggle="modal" href="#exitDiv">退出</a></li>
+               		</c:when>
+               		<c:otherwise>
+               			<li id="log" ><a data-toggle="modal" href="#logDiv">登录</a></li>
+               			<li id="exit" style="display:none"><a data-toggle="modal" href="#exitDiv">退出</a></li>
+               		</c:otherwise>
+               	</c:choose>
+	            
                  <li><a href="regist.jsp">注册</a></li>
               </ul>
             </div>
@@ -87,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
     </div>
     
-    <div class="modal fade" id="loginForm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal fade" id="logDiv" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width:400px">
             <div class="modal-content">
                 <div class="modal-header">
@@ -98,25 +102,53 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <h4 class="modal-title">登录</h4>
                 </div>
                 <div class="modal-body">
-                <form method="get" action="user/login" name="loginForm" id="loginForm">
-               
-                   <label class="sr-only" for="userName" >用户名</label>
-                   <input  id="userName" class="form-control" placeholder="用户名/手机号码" required autofocus name="customer.phone">
-                   <label class="sr-only" for="inputPassword">密码</label>
-                   <input type="password" id="inputPassword" class="form-control" placeholder="密码" required name="customer.password">
-                   <div class="checkbox">
-                      <label>
-                        <input type="checkbox" value="remember-me"> 记住我
-                      </label>
-                      <span style="margin:0 100px">error</span>
-                   </div>
-                   <button id="ajaxLogin" class="btn btn-lg btn-primary btn-block" type="button">登录</button>
-                    </form>
+	                <form method="get" action="user/login" name="loginForm" id="loginForm">
+	                   <label class="sr-only" for="userName" >用户名</label>
+	                   <input  id="userName" class="form-control" placeholder="用户名/手机号码" required autofocus name="customer.phone">
+	                   <label class="sr-only" for="inputPassword">密码</label>
+	                   <input type="password" id="inputPassword" class="form-control" placeholder="密码" required name="customer.password">
+	                   <div class="checkbox" style="text-align:center;overflow:hidden">
+	                      <label style="float:left;" >
+	                        <input type="checkbox" value="remember-me"> 记住我
+	                      </label>
+	                      <span style="margin:0 10px;color:#f60"></span>
+	                   </div>
+	                   <button id="ajaxLogin" class="btn  btn-primary btn-block" type="button">登录</button>
+	                   </form>
                 </div>
                 
             </div>
         </div>
     </div>
+    
+    <div class="modal fade" id="exitDiv" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:400px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" id="exitDivClose" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                	确认退出？
+                </div>
+                <div class="modal-footer">
+		            <button type="button" class="btn btn-default" id="confirm">确定</button>
+		            <button type="button" class="btn btn-primary" id="cancle">取消</button>
+		         </div>
+            </div>
+        </div>
+    </div>
+    <!--
+    <div class="modal fade" id="exitResult" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:400px">
+            <div class="modal-content">
+                <div class="modal-body"></div>
+            </div>
+        </div>
+    </div>
+    -->
 
     <!-- Carousel
     ================================================== -->
@@ -239,7 +271,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
       <!-- /END THE FEATURETTES -->
 
-	<a id="test" href="javascript:void(0)">testAction</a>
       <!-- FOOTER -->
       <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>
@@ -258,35 +289,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>
     <script src="jquery-ui.min.js"></script>
-    <script>
-    	$("#test").click(function(){
-    		location.href="user/testAction";
-    	});
-    	
-    	$(".modal-dialog").draggable({
-    		handle:".modal-header"
-    	});
-    
-    	$("#ajaxLogin").click(function(){
-    		$("#loginForm").hide(500);
-    		//var userName = $("#userName").val();
-    		//var inputPassword = $("#inputPassword").val();
-    		//var customer = "customer.name="+userName+"&customer.password="+inputPassword;
-    		var obj = $("form[name='loginForm']").serialize();
-    		//get第二个参数可以是{}配置项，也可以是字符串
-    		$.post("user/ajax_login",obj,function(data){
-    			if(data.result=="success"){
-    				$(".checkbox span").text(data.result);
-    				$("#logexit>a").replaceWith('<a data-toggle="modal" href="#exit">退出</a>');
-    				$("#loginForm").hide();
-    				$("#logexit a").text("退出");
-    			}else{
-    				$(".checkbox span").text(data.result);
-    			}
-    		});
-    	});
-    	
-    	
-    </script>
+    <script src="js/ajax_log.js"></script>
   </body>
 </html>

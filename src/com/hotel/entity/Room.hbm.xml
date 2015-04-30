@@ -13,6 +13,7 @@
 			<one-to-many class="RoomRemain" />
 		</set>
 		<property name="num"></property>
-		<many-to-one unique="true" name="picture" class="Pic" column="pic_id"></many-to-one>		
+		<many-to-one unique="true" name="picture" class="Pic" column="pic_id"></many-to-one>
+		<many-to-one name="hotel" class="Hotel" column="hotel_id" lazy="false"></many-to-one>		
 	</class>	
 </hibernate-mapping>

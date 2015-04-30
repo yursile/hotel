@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<ul>
 					<li class="item">
 						<label>姓名</label><input class="text" type="text" name="customer.name" />
-						<span for="mobilePhone" class="error">请输入您的手机号码</span>
+						<span for="mobilePhone" class="error">请输入您的姓名</span>
 					</li>
 					<li class="item">
 						<label>手机号码</label><input class="text" type="text" name="customer.phone" />
@@ -52,11 +52,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</li>
 					<li class="item">
 						<label>身份证号</label><input class="text" type="text" name="customer.IDCard" />
-						<span for="mobilePhone" class="error">请输入您的手机号码</span>
+						<span for="mobilePhone" class="error">请输入您的身份证号</span>
 					</li>
 					<li class="item">
 						<label>密码</label><input class="text" type="password" name="customer.password" />
-						<span for="mobilePhone" class="error">请输入您的手机号码</span>
+						<span for="mobilePhone" class="error">请输入您的密码</span>
 					</li>
 					<li class="item">
 						<label>确认密码</label><input class="text" type="password" name="repassword" />
@@ -79,12 +79,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			<div id="registRS">
 				<h4>恭喜您，注册成功</h4>
-				<span>3</span>秒钟之后自动登录
+				<span></span>秒钟之后自动登录
 				<a href="javascript:void(0);">立即登录</a>
-				<form id="loginForm" style="display:none" method="post" action="user/login">
-					<input type="text" name="customer.phone">
-					<input type="text" name="customer.password">
-				</form>
 			</div>
 		</aside>
 		
@@ -93,48 +89,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 		$(function($) {
-		
-			
   			$(".regbtn").click(function(){
-  			/*
-  				$("#regForm").promise().then(function(){
-  					this.submit();
-  				}).done(function(data){
-  					alert(data.result);
-  				});
-  				*/
-  				var phone = $("#regForm input[name='customer.phone']").val();
-  				var pas = $("#regForm input[name='customer.password']").val();
-  				
   				$.post("user/regist.action",$("#regForm").serialize()).done(function(data){
-  					$("aside .step").attr("src","http://pic1.plateno.com/image2/login/registry_step2.jpg");
-  					$("#regForm").hide();
-  					$("#registRS").show();
-  					
-  					var customer = "customer.phone="+ phone + "&customer.password=" + pas;
-  					$("#registRS a").click(function(){
-  						clearInterval(timer);
-  						//$.post("user/login.action",customer);
-  						$("#loginForm input[name='customer.phone']").val(phone);
-						$("#loginForm input[name='customer.password']").val(pas);
-						$("#loginForm").submit();
-  					});
-  					var seconds = 5;
-  					var timer = setInterval(function(){
-  						if(--seconds==0){
-  							clearInterval(timer);
-  							$("#loginForm input[name='customer.phone']").val(phone);
-  							$("#loginForm input[name='customer.password']").val(pas);
-  							$("#loginForm").submit();
-  						}else{
-  							$("#registRS span").text(seconds);
-  						}
-  					},1000);	
+  					if(data=="success"){
+  						$("aside .step").attr("src","http://pic1.plateno.com/image2/login/registry_step2.jpg");
+	  					$("#regForm").hide();
+	  					$("#registRS").show();
+	  					
+	  					$("#registRS a").click(function(){
+	  						clearInterval(timer);
+							document.location.href="index.jsp";
+	  					});
+	  					
+	  					
+	  					var seconds = 5;
+	  					var timer = setInterval(function(){
+	  						if(--seconds==0){
+	  							clearInterval(timer);
+	  							document.location.href="index.jsp";
+	  						}else{
+	  							$("#registRS span").text(seconds);
+	  						}
+	  					},1000);	
+  					}
  				});
   			});
   			
   			$(window).scroll(function(){
-  				//console.log($(document).scrollTop());
   				if($(document).scrollTop()>40){
   					$("nav").css({
 						"box-shadow":"0 3px 3px rgb(233,233,233)"

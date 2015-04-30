@@ -8,19 +8,49 @@
 			<action name="ajax_login" class="ajaxAction" method="login">
 				<result name="login" type="json">
 					<param name="ignoreHierarchy">false</param>
-            		<param name="includeProperties">result</param>
+            		<param name="root">result</param>
+				</result>
+			</action>
+			
+			<action name="ajax_exit" class="ajaxAction" method="exit">
+				<result name="exit" type="json">
+					<param name="ignoreHierarchy">false</param>
+            		<param name="root">result</param>
 				</result>
 			</action>
 			
 			<action name="regist" class="userAction" method="regist">
 				<result name="success" type="json">
 					<param name="ignoreHierarchy">false</param>
-            		<param name="includeProperties">result</param>
+            		<param name="root">result</param>
 				</result>
 			</action>
 			
 			<action name="login" class="userAction" method="login">
-				<result name="success" type="json">/index.jsp</result>
+				<result name="success">/index.jsp</result>
+			</action>
+			
+			
+			
+			<action name="toChangePhone" class="userAction" method="toChangePhone">
+				<result name="toChangePhone" type="json">
+					<param name="ignoreHierarchy">false</param>
+            		<param name="root">result</param>
+				</result>
+			</action>
+			
+			<action name="changePhone" class="userAction" method="changePhone">
+				<result name="changePhone" type="json">
+					<param name="ignoreHierarchy">false</param>
+            		<param name="root">result</param>
+				</result>
+			</action>
+			
+			<action name="changePassword" class="userAction" method="changePassword">
+				<result name="changePassword" type="json">
+					<param name="ignoreHierarchy">false</param>
+            		<param name="root">result</param>
+				</result>
 			</action>
 			
 			<action name="testAction" class="testAction">
