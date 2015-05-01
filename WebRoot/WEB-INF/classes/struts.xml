@@ -8,4 +8,5 @@
 		<include file="com/hotel/struts/config/struts-hotel.xml"></include>
 		<include file="com/hotel/struts/config/struts-order.xml"></include>
 		<include file="com/hotel/struts/config/struts-dispatch.xml"></include>
+		<include file="com/hotel/struts/config/struts-comment.xml"></include>
 	</struts>

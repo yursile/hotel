@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </div>
           <div id="navbar" class="navbar-collapse collapse" style="float: left">
             <ul class="nav navbar-nav">
-              <li ><a href="#">首页</a></li>
+              <li ><a href="index.jsp">首页</a></li>
                  <li class="active"><a href="hotel/toOrderAction.action">预订</a></li>
                 <li><a href="#about">企业差旅</a></li>
                 <li><a href="#contact">关于yursile</a></li>
@@ -71,12 +71,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li><a id="info" href="javascript:void(0)">个人资料</a></li>
                   </ul>
                  </li>
-                 <li id="logexit"><a data-toggle="modal" href="#loginForm">
-                 	<c:choose>
-                 		<c:when test="${sessionScope.loginCustomer.name!=null}">退出</c:when>
-                 		<c:otherwise>登录</c:otherwise>
-                 	</c:choose>
-                 </a></li>
+                   <c:choose>
+               		<c:when test="${sessionScope.loginCustomer.name!=null}">
+               			<li id="log" style="display:none"><a data-toggle="modal" href="#logDiv">登录</a></li>
+               			<li id="exit" ><a data-toggle="modal" href="#exitDiv">退出</a></li>
+               		</c:when>
+               		<c:otherwise>
+               			<li id="log" ><a data-toggle="modal" href="#logDiv">登录</a></li>
+               			<li id="exit" style="display:none"><a data-toggle="modal" href="#exitDiv">退出</a></li>
+               		</c:otherwise>
+               	</c:choose>
                  <li><a href="regist.jsp">注册</a></li>
               </ul>
             </div>
@@ -87,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
     </div><!-- nav结束 -->
     
-     <div class="modal fade" id="loginForm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+     <div class="modal fade" id="logDiv" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width:400px">
             <div class="modal-content">
                 <div class="modal-header">
@@ -98,22 +102,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <h4 class="modal-title">登录</h4>
                 </div>
                 <div class="modal-body">
-                <form method="get" action="user/login" name="loginForm" id="loginForm">
-               
-                   <label class="sr-only" for="userName" >用户名</label>
-                   <input  id="userName" class="form-control" placeholder="用户名/手机号码" required autofocus name="customer.phone">
-                   <label class="sr-only" for="inputPassword">密码</label>
-                   <input type="password" id="inputPassword" class="form-control" placeholder="密码" required name="customer.password">
-                   <div class="checkbox">
-                      <label>
-                        <input type="checkbox" value="remember-me"> 记住我
-                      </label>
-                      <span style="margin:0 100px">error</span>
-                   </div>
-                   <button id="ajaxLogin" class="btn btn-lg btn-primary btn-block" type="button">登录</button>
-                    </form>
+	                <form method="get" action="user/login" name="loginForm" id="loginForm">
+	                   <label class="sr-only" for="userName" >用户名</label>
+	                   <input  id="userName" class="form-control" placeholder="用户名/手机号码" required autofocus name="customer.phone">
+	                   <label class="sr-only" for="inputPassword">密码</label>
+	                   <input type="password" id="inputPassword" class="form-control" placeholder="密码" required name="customer.password">
+	                   <div class="checkbox" style="text-align:center;overflow:hidden">
+	                      <label style="float:left;" >
+	                        <input type="checkbox" value="remember-me"> 记住我
+	                      </label>
+	                      <span style="margin:0 10px;color:#f60"></span>
+	                   </div>
+	                   <button id="ajaxLogin" class="btn  btn-primary btn-block" type="button">登录</button>
+	                   </form>
                 </div>
                 
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="exitDiv" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:400px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" id="exitDivClose" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                	确认退出？
+                </div>
+                <div class="modal-footer">
+		            <button type="button" class="btn btn-default" id="confirm">确定</button>
+		            <button type="button" class="btn btn-primary" id="cancle">取消</button>
+		         </div>
             </div>
         </div>
     </div>
@@ -293,12 +316,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     	<div class="comment">
     		<div class="comment-h">
-    			<a href="javascript:void(0)" id="personalCommnet" title="我要点评">[我要点评]</a>
+    			<a href="javascript:void(0)" id="personalComment" title="我要点评">[我要点评]</a>
     			<h2>客户点评</h2>
-    			
     		</div>
     		
+    		
     		<ul class="comment-ul">
+    			<li class="comment-li comment-box">
+    				<textarea class="commentIpt" id="commentIpt" placeholder="留下您一珍贵的记忆，或宝贵的意见"></textarea>
+    				<button type="button" class="close" id="closeComment">
+    					<span aria-hidden="true">×</span>
+						<span class="sr-only">Close</span>
+    				</button>
+    				<button type="button" class="btn btn-default" id="commit" >确定</button>
+    			</li>
+    		
+    		
     			<li class="comment-li">
     				<span class="comment-man">银卡会员18*******75</span>
     				<div class="comment-content">
@@ -339,6 +372,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		</ul>
     	</div>
     </div>
+    
+    <div class="modal fade" id="commentResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	   <div class="modal-dialog">
+	      <div class="modal-content">
+	         <div class="modal-body">
+	         	<h4></h4>
+	         </div>
+	      </div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
   </body>
   
    <!-- Bootstrap core JavaScript
@@ -350,134 +393,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>
     <script src="jquery-ui.min.js"></script>
-   	<script>
-   		$(function(){
-   		
-	   		(function(){
-		   		var d = new Date();
-				var year = d.getFullYear();
-				var month = d.getMonth();
-				$.each($(".banner a"),function(i,n){
-	   				$(n).text(year+"年"+(month+1+i)+"月");
-	   			});
-	   			createCalendar(year,month+1);
-	   		})();
-	   		
-	   		
-	   		//初始化价格
-	   		(function(){
-	   			var l = $(".roomtype-ul li").length;
-	   			
-	   			
-	   			for(var i=0;i<l;i++){
-	   				$(".roomtype-ul li:eq('"+i+"')").data("price",i*100+99);
-	   			}
-	   		})();
-	   		
-	   		
-	   		function createCalendar(year,month){
-	   			var weekday = new Date(year,month-1,1).getDay();//当前月第一天
-				var days = new Date(year,month,0).getDate();//当前月天数
-	   			var str = "";
-	   			var j = 0;
-		  		for(var i=1;i<43;i++){
-		  			if(i==1){
-		  				str+='<tr>';
-		  			}else if((i)%7==1){
-		  				str+='</tr><tr>';
-		  			}
-		  			if(j<days&&i>weekday){
-		  				str+='<td><a href="javascript:void(0)">' + (j+1) + '</a></td>';
-		  				j++;
-		  			}else{
-		  				str+='<td></td>';
-		  			}
-		  		}
-		  		str+='</tr>';
-		  		$(".date-roomtype tbody").html(str);
-	   		}
-	   		
-	   		
-	   		$(".banner").delegate("li","click",function(){
-	   			$(".banner .month-active").removeClass("month-active");
-	   			$(this).addClass("month-active");
-	   			var date = $(this).find("a").text();
-	   			var year = date.substring(0,date.indexOf("年"));
-	   			var month = date.substring(date.indexOf("年")+1,date.indexOf("月"));
-	   			createCalendar(year,month);
-	   		});
-	   		
-   			
-   			//订房日期  //动态生成的td用代理
-   			$(".date-roomtype tbody").delegate("td","click",function(){
-   				if($(this).hasClass("selected")){
-   					$(this).removeClass("selected");
-   				}else{
-   					$(this).addClass("selected");
-   				}
-   				//修改天数
-   				
-   				var days = $(".date-roomtype .selected").length;
-   				//var unit_price = $(".roomtype-selected").data("price");
-   				var unit_price = $(".roomtype-selected .roomPrice").text();
-   				var num = $("#num").val().substr(0,1);
-   				$("#date-num").val(days+"天");
-   				//修改金额
-   				$("#price").val("￥"+unit_price*days*num);
-   				//$("#price").val();
-   			});
-   			//房间类型导航
-   			$(".roomtype-ul").delegate("li","click",function(e){
-   				$(".roomtype-ul li").removeClass("roomtype-selected");
-   				$(this).addClass("roomtype-selected");
-   				var price = $(this).data("price");
-   				$("#price").val("￥"+price*$("#num").val().substr(0,1)*$(".date-roomtype .selected").length);
-   			});
-   			$("#num").change(function(){
-   				var num = this.value.substr(0,1);
-   				$("#price").val("￥"+$(".roomtype-selected").data("price")*num*$(".date-roomtype .selected").length);
-   			});
-   			
-   			//图片轮播
-   			$(".link-next").click(function(){
-   			
-   				$(".pic-roll").offset({
-   					left:$(".pic-roll").offset().left-($(".pic-roll img").width()+3)
-   				});
-   				var active = $(".pic-roll .active");
-   				active.removeClass("active");
-   				active.next().addClass("active");
-   				$("figure img").attr("src",$(".pic-roll .active img").attr("src"));
-   			});
-   			
-   			$(".link-prev").click(function(){
-   				$(".pic-roll").offset({
-   					left:$(".pic-roll").offset().left+($(".pic-roll img").width()+3)
-   				});
-   				var active = $(".pic-roll .active");
-   				active.removeClass("active");
-   				active.prev().addClass("active");
-				$("figure img").attr("src",$(".pic-roll .active img").attr("src"));
-   			});
-   			
-   			$(".pic-roll").delegate("li","mouseover",function(){
-   				$(this).siblings().removeClass("active");
-   				$(this).addClass("active");
-   				var img = $(this).find("img").attr("src");
-   				$("figure img").attr("src",img);
-   			});
-   			
-   			
-   			
-   		});
-   		
-   		$("#checkOrder").click(function(){
-    		document.location.href="order/checkOrderAction";
-    	});
-    	
-    	$("#info").click(function(){
-    		document.location.href="toInfoAction";
-    	});
-   	</script>
+   	<script src="js/ajax_log.js"></script>
    	<script src="js/hotelInfo.js"></script>
+   
 </html>

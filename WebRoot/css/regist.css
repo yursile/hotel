@@ -8,7 +8,7 @@ nav{
 	font-size:18px;line-height:42px;color:#ccc;
 }
 */
-
+/*
 nav{
 	height:42px;position:fixed;top:0;width:100%;font-size:18px;line-height:42px;background:rgb(248,248,248);
 }
@@ -16,25 +16,42 @@ nav ul{width:960px;padding:0 20px; margin:0 auto;text-align:center}
 nav li{
 	display:inline-block;width:140px;
 }
+*/
 .navbtn{display:block;margin:0 auto;padding:3px;}
 .navbtn:hover{background:rgb(231,231,231);cursor:pointer}
-.container{width:960px;margin:50px auto 0;padding-top:20px;}
-aside{float:right;width:430px}
-h3{height:55px;line-height:55px;border-bottom:1px dotted #cfcbc6;color:#a5a19c}
+.container{position:relative}
+aside{float:right;width:430px;}
+.regTittle{height:55px;line-height:55px;border-bottom:1px dotted #cfcbc6; color: #a5a19c;
+    font-size: 14px;
+}
 .loginlink{float: right;color: #F60;height: 55px;line-height:55px;}
 .loginlink:hover{cursor:pointer;text-decoration:underline}
 .step{display:block;margin-top:20px;width:272px;margin-left:auto;margin-right:auto}
 form{width:410px;height:493px;text-align:center;margin-top:20px}
-label:not(.agree){width: 80px;line-height: 35px;text-align: right;margin-right: 10px;display:inline-block}
+label:not(.agree){width: 80px;line-height: 35px;text-align: right;margin-right: 10px;display:inline-block;
+	font-size:12px;
+}
 .text{height: 30px;line-height: 30px;text-indent: 10px;width:280px;color: #333;border: 1px solid #ccc;}
-.error{width:145px;display:block;color:#c00;margin-left:100px;text-indent:15px;height:16px;line-height:20px;background:url(http://pic1.plateno.com/image2/login/registry.png) no-repeat -3px -2px;visibility:hidden;}
-.item{margin:10px 0;}
+.error{
+	position:absolute;left:145px;top:34px;
+	text-align:left;
+	width:145px;color:#c00;padding-left:30px;text-indent:15px;height:16px;line-height:20px;
+	background:url(http://pic1.plateno.com/image2/login/registry.png)  no-repeat -3px 0px;}
+.item{height:55px;position:relative}
 .regbtn{margin-left:85px;width:280px;border-radius: 3px;border: 1px solid #ff0f38;margin-top: 22px;height: 36px;line-height: 36px;cursor:pointer}
 .bg-img{
 	position:absolute;
-	left:192px;
-	top:160px;
+	top:73px;
 }
 #registRS{
 	width:410px;height:493px;text-align:center;margin-top:20px;display:none;
+}
+.htmlTitle{
+	position:absolute;
+}
+.show{
+	display:block;
+}
+.hidden{
+	display:none;
 }

@@ -353,7 +353,7 @@ h2{
     line-height:33px;
     margin:0;
 }
-#personalCommnet{
+#personalComment{
 	float:right;
 	margin-right:20px;
 	color:#cf1616;
@@ -409,4 +409,41 @@ h2{
 
 .roomId,.roomPrice{
 	display:none;
+}
+
+
+
+.commentIpt{
+	background: none repeat scroll 0 0 #fff;
+    border: 1px solid #e3e3e3;
+    border-radius: 3px;
+    color: #404040;
+    font-size: 16px;
+    height: 160px;
+    line-height: 22px;
+    overflow: hidden;
+    padding: 10px;
+    width: 100%;
+    display:inline-block;
+    resize:none;
+    box-shadow:0 0 10px rgba(0,0,0,.7);
+    text-indent:1em;
+}
+
+.comment-box{
+	position:relative;
+	text-align:center;
+	display:none;
+}
+
+#commit{
+	position:absolute;
+	right:18px;
+	bottom:19px;
+}
+
+#closeComment{
+	position:absolute;
+	right:16px;
+	top:11px;
 }
