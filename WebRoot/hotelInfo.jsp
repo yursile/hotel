@@ -212,13 +212,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<option>3间</option>
 							</select>
 						</li>
-						<li>
+						
+						<li style="position:relative;">
 							<label>支付</label>
 							<input value="" class="hidden-outline hl" id="price"/>
+							<span class="error" id="dateError">请选择日期</span>
+							<span class="error" id="typeError">请选择房间</span>
 						</li>
 						<li style="text-align:center">
 							<a href="javascript:void(0)" id="submit-order"></a>
 						</li>
+						
 						<li class="hidden">
 							<input type="text" id="hotelId" name="hotelId" value="${hotel.id}"/>
 							<input type="text" id="roomId" name="roomId" />
@@ -332,13 +336,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			</li>
     		
     		
-    			<li class="comment-li">
-    				<span class="comment-man">银卡会员18*******75</span>
-    				<div class="comment-content">
-    					<p class="comment-p">网速可以更快些</p>
-    					<time class="comment-time">(2015-4-5 11:37)</time>
-    				</div>
-    			</li>
+    			<c:forEach items="#{comments}" var = "comment">
+    				<li class="comment-li">
+	    				<span class="comment-man">${comment.customer.name}</span>
+	    				<div class="comment-content">
+	    					<p class="comment-p">${comment.content}</p>
+	    					<time class="comment-time">(${comment.time})</time>
+	    				</div>
+	    			</li>
+    			</c:forEach>
+    		
     			<li class="comment-li">
     				<span class="comment-man">银卡会员18*******75</span>
     				<div class="comment-content">

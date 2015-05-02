@@ -46,10 +46,3 @@ $("#exitDiv").delegate("#confirm","click",function(){
 	});
 });
 
-$("#checkOrder").click(function(){
-	document.location.href="order/checkOrderAction";
-});
-
-$("#info").click(function(){
-	document.location.href="toInfoAction";
-});

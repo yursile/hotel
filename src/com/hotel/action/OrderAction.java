@@ -35,7 +35,7 @@ public class OrderAction extends BaseAction{
 
 	public String toOrder(){
 		Customer customer = (Customer) session.get("loginCustomer");
-		orderService.saveOrder(customer, roomId, hotelId, num, days);
+		String saveResult = orderService.saveOrder(customer, roomId, hotelId, num, days);
 		//返回days list 
 		dayList = HotelUtil.formatFLday(days);
 		//返回hotelName

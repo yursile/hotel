@@ -1,15 +1,12 @@
-//$("#regForm").delegate(".item input","blur",function(){
-//	var val = $(this).val();
-//	if(val.trim()==""){
-//		$(this).next().show();
-//	}else{
-//		$(this).next().hide();
-//	}
-//});
 
 $("#regForm").delegate(".item input","blur",function(){
-	var val = $(this).val();
-	if(val.trim()==""){
+	var val = $(this).val().trim();
+	var validate_type = $(this).attr("data-validate");
+	if(val==""){
+		$(this).next().removeClass("hidden");
+		$(this).next().addClass("show");
+	}else if(validate_type && !validateType(validate_type,val)){
+		$(this).next().text($(this).attr("data-validateInfo"));
 		$(this).next().removeClass("hidden");
 		$(this).next().addClass("show");
 	}else{
@@ -17,6 +14,16 @@ $("#regForm").delegate(".item input","blur",function(){
 		$(this).next().addClass("hidden");
 	}
 });
+
+function validateType(type,val){
+    switch(type){
+	    case "phone": return /^1[3,4,5,8,9][1-9]\d{8}$/.test(val);break;
+	    case "IDCard": return /^\d{17}(\d|X|x)$/.test(val); break;
+	    case "name": return /^[\u4E00-\u9FA5]{2,4}$/.test(val);break;
+	    case "password": return /^[a-z | A-Z](\w|\.|,){5,15}$/.test(val);break;
+	    default: return false;
+    }
+}
 
 
 $("#regForm").delegate("#password","blur",function(){
@@ -48,11 +55,24 @@ $("#regForm").delegate("#repassword","blur",function(){
 	}
 });
 
+function jqueryToArray(jqueryObj){
+	 var temp = [];
+	 for(var i=0;i<jqueryObj.length;i++){
+         temp[i] = jqueryObj[i];
+     }
+	 return temp;
+}
+
 
 $(".regbtn").click(function(){
 	//前端验证
 	var temp = $("#regForm .show")[0];
-	if(temp){
+	var items =  $("#regForm .item").not($("#regForm .item").last());
+	//是否全部输入
+	var tag = jqueryToArray(items).some(function(ele){
+         return $(ele).children("input").val()=="";
+     });
+	if(temp||tag){
 		$("#errorInfo .modal-body h4").text("信息不完整");
 		$("#errorInfo").addClass("in").css({
 			"display":" block",

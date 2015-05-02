@@ -4,10 +4,8 @@
 	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
 	<struts>
 		<package name="dispatch" extends="json-default" namespace="/">
-		
 			<action name="*Action" class="dispatchAction" method="{1}">
 				<result name="{1}">/{1}.jsp</result>
 			</action>
-		
 		</package>
 	</struts>

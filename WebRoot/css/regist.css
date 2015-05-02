@@ -35,7 +35,7 @@ label:not(.agree){width: 80px;line-height: 35px;text-align: right;margin-right: 
 .error{
 	position:absolute;left:145px;top:34px;
 	text-align:left;
-	width:145px;color:#c00;padding-left:30px;text-indent:15px;height:16px;line-height:20px;
+	color:#c00;padding-left:30px;text-indent:15px;height:16px;line-height:20px;
 	background:url(http://pic1.plateno.com/image2/login/registry.png)  no-repeat -3px 0px;}
 .item{height:55px;position:relative}
 .regbtn{margin-left:85px;width:280px;border-radius: 3px;border: 1px solid #ff0f38;margin-top: 22px;height: 36px;line-height: 36px;cursor:pointer}

@@ -1,6 +1,10 @@
 package com.hotel.action;
 
+import java.util.List;
+
+import com.hotel.entity.Comment;
 import com.hotel.entity.Hotel;
+import com.hotel.service.CommentService;
 import com.hotel.service.HotelService;
 
 /**
@@ -18,10 +22,18 @@ public class HotelAction extends BaseAction{
 	private HotelService hotelService;
 	private Hotel hotel;
 	private String roomType;
+	private CommentService commentService;
+	private List<Comment> comments;
 	
 
 	public String hotelInfo(){
-		hotel = hotelService.findHotelById(hotelId);
+		try {
+			hotel = hotelService.findHotelById(hotelId);
+			comments = commentService.findCommentByHotel(hotel);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		session.put("currentHotel", hotel);
 		return "hotelInfo";
 	}
 	
@@ -57,5 +69,21 @@ public class HotelAction extends BaseAction{
 
 	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
+	}
+
+	public CommentService getCommentService() {
+		return commentService;
+	}
+
+	public void setCommentService(CommentService commentService) {
+		this.commentService = commentService;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 }

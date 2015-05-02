@@ -396,6 +396,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    		</ul>
 	    	</div>
 		</div>
+		
+		<div class="order-advice">
+    		<ul>
+				<li>* 温馨提示： </li>
+				<li>  可以查询最近半年的订单信息。 </li>
+				<li>  酒店订单是指过去二个月内离店、取消、预订未到的订单，和所有预订有效的订单。 </li>
+				<li>  历史酒店订单是指二个月前及半年内的离店、取消和预订未到的订单。 </li>
+				<li>  离店后7天内，入住人可以对入住分店进行点评。点击订单后方的点评链接进入，非入住人不可点评。 </li>
+				<li>  如需取消已支付的订单（积分兑换房、特价房、其它有限制不能取消的除外），请在入住当天18点前取消，房费全部退回储值（返现券和抵用券按规则返还）。</li>
+			</ul>
+    	</div>
 	</div>
 
 	 <!-- Bootstrap core JavaScript

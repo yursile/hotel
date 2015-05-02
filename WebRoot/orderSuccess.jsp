@@ -218,7 +218,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	
 	    	<div class="control">
 	    		<p style="margin-bottom:20px;">铂涛会提供储值、抵用券、信用卡、微信支付等多种在线支付方式。</p>
-	    		<a class="success-btn" href="javascript:void(0)" id="checkOrder">查看订单</a>
+	    		<a class="success-btn" href="javascript:void(0)" id="checkOrder2">查看订单</a>
 	    		<a class="success-btn" href="javascript:void(0)" id="returnMain">返回首页</a>
 	    	</div>
     		
@@ -241,15 +241,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>
     <script src="jquery-ui.min.js"></script>
-    <script type="text/javascript">
-    	
-    	$("#checkOrder").click(function(){
-    		document.location.href="order/checkOrderAction";
-    	});
-    	
-    	$("#info").click(function(){
-    		document.location.href="toInfoAction";
-    	});
-    </script>
+  
   	 <script src="js/ajax_log.js"></script>
+  	 <script type="text/javascript">
+  	 	$("#checkOrder2").click(function(){
+			alert("ddd");
+			document.location.href="order/checkOrderAction";
+		});
+		
+		$("#returnMain").click(function(){
+			document.location.href="/index.jsp";
+		});
+  	 </script>
 </html>

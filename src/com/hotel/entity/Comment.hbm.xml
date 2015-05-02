@@ -9,6 +9,8 @@
 		<property name="content"></property>
 		<property name="level"></property>
 		<property name="type"></property>
-		<many-to-one name="order" class="Order" cascade="save-update" unique="true" column="order_id"></many-to-one>
+		<property name="time"></property>
+		<many-to-one name="customer" class="Customer" lazy="false" column="customer_id"></many-to-one>
+		<many-to-one name="hotel" class="Hotel" lazy="false" column="hotel_id"></many-to-one>
 	</class>	
 </hibernate-mapping>

@@ -38,11 +38,19 @@ $("#submit-order").click(function(){
 	})();
 	var days = (inDays.join(","));
 	
-	
-	$("#days").val(days);
-	$("#roomId").val(roomId);
-	$("#back-num").val(num);
-	$("#hotel-orderForm").submit();
+	//没有选择日期
+	var unit_price = $(".roomtype-selected .roomPrice").text();
+	if(days.trim()==""){
+		$("#hotel-orderForm #dateError").show();
+	}else if(unit_price.trim()==""){
+		$("#typeError").show();
+		
+	}else{
+		$("#days").val(days);
+		$("#roomId").val(roomId);
+		$("#back-num").val(num);
+		$("#hotel-orderForm").submit();
+	}
 	
 });
 
@@ -113,8 +121,13 @@ $(function(){
 				$(this).addClass("selected");
 			}
 			//修改天数
-			
 			var days = $(".date-roomtype .selected").length;
+			
+			//隐藏错误提示
+			if(days>0){
+				$("#dateError").hide();
+			}
+			
 			//var unit_price = $(".roomtype-selected").data("price");
 			var unit_price = $(".roomtype-selected .roomPrice").text();
 			var num = $("#num").val().substr(0,1);
@@ -127,6 +140,7 @@ $(function(){
 		$(".roomtype-ul").delegate("li","click",function(e){
 			$(".roomtype-ul li").removeClass("roomtype-selected");
 			$(this).addClass("roomtype-selected");
+			$("#typeError").hide();
 			var price = $(this).data("price");
 			$("#price").val("￥"+price*$("#num").val().substr(0,1)*$(".date-roomtype .selected").length);
 		});
@@ -188,10 +202,24 @@ $("#closeComment").click(function(){
 });
 
 $("#commit").click(function(){
-	var comment = $("#commentIpt").val();
-	$.post("comment/addComment",{"comment":comment},function(result){
+	var content = $("#commentIpt").val();
+	$.post("comment/addComment",{"content":content},function(data){
+		if(data.result="评论成功"){
+			var comments = data.comments;
+			var html = [];
+			for(var comment in comments){
+				html.push('<li class="comment-li"><span class="comment-man">"'+comments[comment].customer.name+'"</span>');
+				html.push('<div class="comment-content"><p class="comment-p">"'+comments[comment].content+'"</p>');
+				html.push('<time class="comment-time">("'+comments[comment].time+'")</time></div></li>');
+			}
+			html = html.join("");
+			$(".comment-box").nextAll(".comment-li").remove();
+			$(".comment-box").after(html);
+		}
 		
-		$("#commentResult .modal-body h4").text(result);
+		$(".comment-box").hide();
+		
+		$("#commentResult .modal-body h4").text(data.result);
 		$("#commentResult").addClass("in").css({
 			"display":" block",
 			"padding-right": "17px",

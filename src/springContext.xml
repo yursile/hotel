@@ -70,6 +70,7 @@
     
     <bean id="hotelAction" class="com.hotel.action.HotelAction" scope="prototype">
      	<property name="hotelService" ref="hotelService"></property>
+     	<property name="commentService" ref="commentService"></property>
     </bean>
      
 	<bean id="userAction" class="com.hotel.action.UserAction" scope="prototype">
@@ -84,8 +85,17 @@
      	<property name="userService" ref="userService"></property>
     </bean>
     
+    <bean id="commentAction" class="com.hotel.action.CommentAction" scope="prototype">
+     	<property name="commentService" ref="commentService"></property>
+    </bean>
+    
     <bean id="userService" class="com.hotel.service.impl.UserServiceImpl">
      	<property name="userDAO" ref="userDAO"></property>
+    </bean>
+    
+    <bean id="commentService" class="com.hotel.service.impl.CommentServiceImpl">
+     	<property name="commentDAO" ref="commentDAO"></property>
+     	<property name="orderService" ref="orderService"></property>
     </bean>
     
     <bean id="orderAction" class="com.hotel.action.OrderAction" scope="prototype">
@@ -98,6 +108,10 @@
     </bean>
    
     <bean id="userDAO" class="com.hotel.dao.impl.UserDAOImpl">
+    	<property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+     <bean id="commentDAO" class="com.hotel.dao.impl.CommentDAOImpl">
     	<property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
    

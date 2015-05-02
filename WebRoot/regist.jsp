@@ -155,19 +155,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<form id="regForm" action="user/regist.action" method="post">
 				<ul>
 					<li class="item">
-						<label>姓名</label><input class="text" type="text" name="customer.name" />
+						<label>姓名</label><input class="text" type="text" data-validate="name" name="customer.name" data-validateInfo="请输入您的中文姓名"/>
 						<span for="mobilePhone" class="error hidden">请输入您的姓名</span>
 					</li>
 					<li class="item">
-						<label>手机号码</label><input class="text" type="text" name="customer.phone" />
+						<label>手机号码</label><input class="text" type="text" data-validate="phone" name="customer.phone"  data-validateInfo="请输入正确的手机号码"/>
 						<span for="mobilePhone" class="error hidden">请输入您的手机号码</span>
 					</li>
 					<li class="item">
-						<label>身份证号</label><input class="text" type="text" name="customer.IDCard" />
+						<label>身份证号</label><input class="text" type="text" name="customer.IDCard" data-validate="IDCard"  data-validateInfo="请输入18位标准身份证号"/>
 						<span for="mobilePhone" class="error hidden">请输入您的身份证号</span>
 					</li>
 					<li class="item">
-						<label>密码</label><input class="text" type="password" name="customer.password"  id="password"/>
+						<label>密码</label><input class="text" type="password" name="customer.password"  id="password" data-validate="password"  data-validateInfo="密码必须以字母开头,8到20位"/>
 						<span for="mobilePhone" class="error hidden">请输入您的密码</span>
 					</li>
 					<li class="item">

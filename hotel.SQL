@@ -11,20 +11,20 @@ insert into tb_room(id,type,price,num,pic_id,hotel_id) values (003,'商务大床
 insert into tb_room(id,type,price,num,pic_id,hotel_id) values (004,'商务大床房',299,20,null,002);
 insert into tb_room(id,type,price,num,pic_id,hotel_id) values (005,'经济房',99,20,null,002);
 insert into tb_room(id,type,price,num,pic_id,hotel_id) values (006,'传统大床房',199,20,null,002);
-insert into tb_roomremain(id,room_id,day,remain)  values (001,001,20150411,30);
-insert into tb_roomremain(id,room_id,day,remain)  values (002,001,20150412,30);
-insert into tb_roomremain(id,room_id,day,remain)  values (003,001,20150413,30);
-insert into tb_roomremain(id,room_id,day,remain)  values (004,001,20150414,30);
+insert into tb_roomremain(id,room_id,day,remain)  values (001,001,20150511,30);
+insert into tb_roomremain(id,room_id,day,remain)  values (002,001,20150512,30);
+insert into tb_roomremain(id,room_id,day,remain)  values (003,001,20150513,30);
+insert into tb_roomremain(id,room_id,day,remain)  values (004,001,20150514,30);
 
-insert into tb_roomremain(id,room_id,day,remain)  values (005,002,20150411,30);
-insert into tb_roomremain(id,room_id,day,remain)  values (006,002,20150412,0);
-insert into tb_roomremain(id,room_id,day,remain)  values (007,002,20150413,30);
-insert into tb_roomremain(id,room_id,day,remain)  values (008,002,20150414,30);
+insert into tb_roomremain(id,room_id,day,remain)  values (005,002,20150511,30);
+insert into tb_roomremain(id,room_id,day,remain)  values (006,002,20150512,0);
+insert into tb_roomremain(id,room_id,day,remain)  values (007,002,20150513,30);
+insert into tb_roomremain(id,room_id,day,remain)  values (008,002,20150514,30);
 
-insert into tb_roomremain(id,room_id,day,remain)  values (009,005,20150411,30);
-insert into tb_roomremain(id,room_id,day,remain)  values (010,005,20150412,0);
-insert into tb_roomremain(id,room_id,day,remain)  values (011,005,20150413,30);
-insert into tb_roomremain(id,room_id,day,remain)  values (012,005,20150414,30);
+insert into tb_roomremain(id,room_id,day,remain)  values (009,005,20150511,30);
+insert into tb_roomremain(id,room_id,day,remain)  values (010,005,20150512,0);
+insert into tb_roomremain(id,room_id,day,remain)  values (011,005,20150513,30);
+insert into tb_roomremain(id,room_id,day,remain)  values (012,005,20150514,30);
 
 
 insert into tb_pic(id,path,hotel_id) values (001,"http://img1.plateno.com/inn/023041/02ac3820cb68d31fc431ff66060ff84b_120_120.jpg",001);

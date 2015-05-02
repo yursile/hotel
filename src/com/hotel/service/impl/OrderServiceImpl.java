@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.hotel.dao.OrderDAO;
 import com.hotel.entity.Customer;
-import com.hotel.entity.Hotel;
 import com.hotel.entity.Order;
 import com.hotel.entity.Room;
 import com.hotel.entity.RoomRemain;
@@ -74,11 +73,9 @@ public class OrderServiceImpl implements OrderService{
 
 
 	@Override
-	public void saveOrder(Customer customer,long roomId, long hotelId, int num, String days) {
+	public String saveOrder(Customer customer,long roomId, long hotelId, int num, String days) {
 		List<int []> dayList = HotelUtil.formatDay(days);
 		Room room = roomService.findRoomById(roomId);
-//		RoomRemain rr = roomRemainService.findRoomRemain(day, room);
-		Hotel hotel = hotelService.findHotelById(hotelId);
 		int generateTime = HotelUtil.getNowDay();
 		for(int [] group:dayList){
 			int arriveDate = group[0];
@@ -87,7 +84,12 @@ public class OrderServiceImpl implements OrderService{
 			
 			for(int i=arriveDate;i<=departureDate;i++){
 				RoomRemain rr = roomRemainService.findRoomRemain(i, room);
-				rr.setRemain(rr.getRemain()-1);
+				if(rr==null){
+					return "房间已满";
+				}else{
+					rr.setRemain(rr.getRemain()-1);
+				}
+				
 			}
 			order.setRoom(room);
 			
@@ -103,8 +105,10 @@ public class OrderServiceImpl implements OrderService{
 				orderDAO.saveOrder(order);
 			} catch (Exception e) {
 				e.printStackTrace();
+				return "系统错误";
 			}
 		}
+		return "预订成功";
 	}
 
 
@@ -155,6 +159,17 @@ public class OrderServiceImpl implements OrderService{
 		try {
 			Order order = orderDAO.findOrderByOrderId("from Order o where o.customer.id=? and o.id =?", customerId, orderId);
 			orders.add(order);
+			return orders;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<Order> findOrderByHotel(long customerId, long hotelId) {
+		try {
+			List<Order> orders = orderDAO.findOrder("from Order o where o.customer.id=? and o.room.hotel.id =?", customerId, hotelId);
 			return orders;
 		} catch (Exception e) {
 			e.printStackTrace();

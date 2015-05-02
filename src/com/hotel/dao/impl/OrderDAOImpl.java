@@ -138,5 +138,23 @@ public class OrderDAOImpl extends HibernateDaoSupport implements OrderDAO{
 			}
 		});
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Order> findOrder(final String hql, final long customerId, final long hotelId)
+			throws Exception {
+		return (List<Order>)this.getHibernateTemplate().execute(new HibernateCallback() {
+			public Object doInHibernate(Session session) throws HibernateException,
+					SQLException {
+				Query query = 
+					session.createQuery(hql);
+				query.setLong(0, customerId);
+				query.setLong(1, hotelId);
+				System.out.println("dao excute");
+				List<Order> list = query.list();
+				return list;
+			}
+		});
+	}
 	
 }

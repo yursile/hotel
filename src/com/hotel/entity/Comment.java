@@ -3,9 +3,11 @@ package com.hotel.entity;
 public class Comment {
 	private long id;
 	private String content;
-	private int level;
-	private int type;//
-	private Order order;
+	private int level;//几星
+	private int type;//1不满意  2满意  3满意并推荐入住
+	private int time;
+	private Customer customer;
+	private Hotel hotel;
 	
 	public long getId() {
 		return id;
@@ -31,10 +33,22 @@ public class Comment {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Order getOrder() {
-		return order;
+	public Customer getCustomer() {
+		return customer;
 	}
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	public int getTime() {
+		return time;
+	}
+	public void setTime(int time) {
+		this.time = time;
+	}
+	public Hotel getHotel() {
+		return hotel;
+	}
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
 	}
 }

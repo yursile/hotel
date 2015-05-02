@@ -8,9 +8,12 @@
 			<action name="addComment" class="commentAction" method="addComment">
 				<result name="addComment" type="json">
 					<param name="ignoreHierarchy">false</param>
-            		<param name="root">result</param>
+					<!-- 
+					<param name="root">comments</param>
+					<param name="excludeProperties">comments.</param>
+					 -->
+            		<param name="includeProperties">result,comments.*</param>
 				</result>
 			</action>
-			
 		</package>
 	</struts>

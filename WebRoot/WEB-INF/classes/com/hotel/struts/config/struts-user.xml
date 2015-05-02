@@ -30,8 +30,6 @@
 				<result name="success">/index.jsp</result>
 			</action>
 			
-			
-			
 			<action name="toChangePhone" class="userAction" method="toChangePhone">
 				<result name="toChangePhone" type="json">
 					<param name="ignoreHierarchy">false</param>
