@@ -13,4 +13,6 @@ public interface OrderDAO {
 	public List<Order> findOrder(String hql,long customerId,int startTime,int endTime,int status)throws Exception;
 	public List<Order> findOrder(String hql,long customerId,int time,int status)throws Exception;
 	public List<Order> findOrder(String hql,long customerId,long hotelId)throws Exception;
+	public void editOrder(Order order)throws Exception;
+	public void deleteOrder(Order order)throws Exception;
 }

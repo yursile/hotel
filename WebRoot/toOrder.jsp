@@ -300,7 +300,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    							<td>${room.type }</td>
 	    							<td>￥${room.price }</td>
 	    							<td>￥${room.price }</td>
-	    							<td><a class="quickorder" href="hotel/hotelInfoAction.action?hotelId=${room.id}&roomType=${room.type}">预订</a></td>
+	    							<td><a class="quickorder" href="hotel/hotelInfoAction.action?hotelId=${room.hotel.id}&roomType=${room.type}">预订</a></td>
 	    						</tr>
 	    						</c:forEach>
 	    					</tbody>

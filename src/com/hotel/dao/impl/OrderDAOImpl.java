@@ -21,7 +21,7 @@ public class OrderDAOImpl extends HibernateDaoSupport implements OrderDAO{
 
 	@Override
 	public List<Order> findOrderByCustomerId(long customerId) {
-		List<Order> orders = this.getHibernateTemplate().find("from Order o where o.customer.id=?", customerId);
+		List<Order> orders = this.getHibernateTemplate().find("from Order o where o.customer.id=? order by o.id desc", customerId);
 		return orders;
 	}
 
@@ -156,5 +156,14 @@ public class OrderDAOImpl extends HibernateDaoSupport implements OrderDAO{
 			}
 		});
 	}
-	
+
+	@Override
+	public void editOrder(Order order) throws Exception {
+		this.getHibernateTemplate().update(order);
+	}
+
+	@Override
+	public void deleteOrder(Order order) throws Exception {
+		this.getHibernateTemplate().delete(order);
+	}
 }

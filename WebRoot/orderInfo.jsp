@@ -321,133 +321,163 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</form>
 		
 		
-		<nav class="order-nav">
-			<ul>
-				<li class="nav-title">我的订单</li>
-				<li class="active"><a href="javascript:void(0)" title="当前订单">当前订单</a></li>
-				<li><a href="javascript:void(0)" title="历史订单">历史订单</a></li>
-			</ul>
-		</nav>
+		<nav ><h1 class="titleName">订单详情</h1></nav>
 		
-		<div class="order-box">
-			<table>
-				<thead>
-					<tr>
-						<th style="width:110px">订单编号</th>
-						<th style="width:200px">预订日期</th>
-						<th style="width:180px">酒店</th>
-						<th style="width:200px">入住\离店日期</th>
-						<th style="width:100px">总价</th>
-						<th style="width:120px">订单状态</th>
-						<th style="width:100px">操作</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items = "${orders }" var="order">
-						<tr>
-							<td><a class="orderId" href="javascript:void(0)">${order.id}</a></td>
-							<td>${order.generateTime}</td>
-							<td><a class="hotelName" href="javascript:void(0)" data-hotelId="${order.room.hotel.id}">${order.room.hotel.name}</a></td>
-							<td>
-								<time>${order.arriveDate}</time>
-								<time>${order.departureDate}</time>
-							</td>
-							<td class="price-td">￥${order.price}</td>
-							<c:choose>
-								<c:when test="${order.status==1}">
-									<td class="orderStatusText">预订有效</td>
-								</c:when>
-								<c:otherwise>
-									<td class="orderStatusText">已过期</td>
-								</c:otherwise>
-							</c:choose>
-							<c:choose>
-								<c:when test="${order.status==2 }">
-									<td>
-										<a class="op deleteOrder" href="javascript:void(0)"  title="删除" data-id="${order.id}">删除</a>
-									</td>
-								</c:when>
-								<c:otherwise>
-									<td>
-										<a class="op cancelOrderId" href="javascript:void(0)" title="取消"  data-id="${order.id}">取消</a>
-										<a class="op updateOrderId" href="javascript:void(0)" title="修改"  data-id="${order.id}">修改</a>
-									</td>
-								</c:otherwise>
-							</c:choose>
-						</tr>
-					</c:forEach>
+		<c:forEach items="${orders}" var="order" end="0">
+		<div class="orderInfo-box">
+			<div class="order-title">
+				<div class="order-title-item">
+					<ul>
+						<li class="order-detail-item">
+							<label id="orderId">订单号：${order.id}</label>
+						</li>
+						<li class="order-detail-item">
+							<label>预订日期：${order.generateTime}</label>
+						</li>
+						<li class="order-detail-item">
+							<label>预订方式： 网站 </label>
+						</li>
+						
+					</ul>
+				</div>
+				<div class="order-title-item" id="orderStatusChange">
+					<c:choose>
+						<c:when test="${order.status==1}">
+							<label class="blue">房间保留至 ${order.generateTime} 21:00</label>
+						</c:when>
+						<c:when test="${order.status==2 }">
+							<label class="blue">房间已取消预订</label>
+						</c:when>
+						<c:when test="${order.status==3 }">
+							<label class="blue">预订未到</label>
+						</c:when>
+						<c:when test="${order.status==4 }">
+							<label class="blue">正在入住，祝您愉快</label>
+						</c:when>
+						<c:otherwise>
+							<label class="blue">已于${order.departureDate}离店</label>
+						</c:otherwise>
+					</c:choose>
 					
-					<tr>
-						<td><a class="orderId" href="javascript:void(0)">7896</a></td>
-						<td>2015-04-09</td>
-						<td><a class="hotelName" href="javascript:void(0)">重庆北碚轻轨总站西南大学店</a></td>
-						<td>
-							<time>2015-04-09</time>
-							<time>2015-04-10</time>
-						</td>
-						<td class="price-td">￥165</td>
-						<td>预订有效</td>
-						<td>
-							<a class="op" href="javascript:void(0)" title="取消">取消</a>
-							<a class="op" href="javascript:void(0)" title="修改">修改</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+					<table>
+						<tbody>
+						<c:choose>
+							<c:when test="${order.status==1}">
+								<tr>
+									<td class="order-info-icon order-status-active"></td>
+									<td class="order-info-icon"></td>
+									<td class="order-info-icon"></td>
+								</tr>
+								<tr>
+									<td class="order-status">1.新订</td>
+									<td>2.在住</td>
+									<td>3.离店</td>
+								</tr>
+							</c:when>
+							
+							<c:when test="${order.status==2}">
+								<tr>
+									<td class="order-info-icon"></td>
+									<td class="order-info-icon order-status-active"></td>
+								</tr>
+								<tr>
+									<td >1.新订</td>
+									<td class="order-status">2.取消</td>
+								</tr>
+							</c:when>
+							
+							<c:when test="${order.status==4 }">
+								<tr>
+									<td class="order-info-icon "></td>
+									<td class="order-info-icon order-status-active"></td>
+									<td class="order-info-icon"></td>
+									<td class="order-info-icon"></td>
+								</tr>
+								<tr>
+									<td >1.新订</td>
+									<td class="order-status">2.在住</td>
+									<td>3.离店</td>
+								</tr>
+							</c:when>
+							
+							<c:when test="${order.status==5 }">
+								<tr>
+								<td class="order-info-icon"></td>
+								<td class="order-info-icon "></td>
+								<td class="order-info-icon order-status-active"></td>
+							</tr>
+							<tr>
+								<td >1.新订</td>
+								<td class="order-status">2.在住</td>
+								<td >3.离店</td>
+							</tr>
+							</c:when>
+							
+						</c:choose>
+							
+						</tbody>
+					</table>
+				</div>
+				<div class="order-title-item">
+					<label class="totalPrice">总金额  RMB  ${order.price } </label>
+				</div>
+			</div>
 			
-			<div class="page-box">
-	    		<ul>
-	    			<li><a class="p_btn" href="javascript:void(0)">首页</a></li>
-	    			<li><a class="p_btn" href="javascript:void(0)">上一页</a></li>
-	    			<li><a class="nowPage page-num" href="javascript:void(0)">1</a></li>
-	    			<li><a class="page-num" href="javascript:void(0)">2</a></li>
-	    			<li><a class="page-num" href="javascript:void(0)">3</a></li>
-	    			<li><a class="p_btn" href="javascript:void(0)">下一页</a></li>
-	    			<li><a class="p_btn" href="javascript:void(0)">末页</a></li>
-	    		</ul>
-	    	</div>
+			<div class="order-info">
+				<div class="roomInfo">
+					<h3 class="infoName">房间信息</h3>
+					<div class="roomInfo-top">
+						<ul>
+							<li class="hotelName"><a href="javascript:void(0)">${order.room.hotel.name }</a></li>
+							<li class="hotelAdress"><address>${order.room.hotel.address }</address></li>
+						</ul>
+					</div>
+					<div class="roomInfo-bottom">
+					<!-- 
+						<ul>
+							<li class="order-info-item">入住日期：2015-05-02</li>
+							<li class="order-info-item">离店日期：2015-05-03</li>
+							<li class="order-info-item">保留时效：2015-5-2 21:00</li>
+							<li class="order-info-item">房型： 自主大床房</li>
+							<li class="order-info-item">早餐：无</li>
+							<li class="order-info-item">酒店礼物：无</li>
+						</ul>
+					 -->
+					 
+					 <ul>
+							<li class="order-info-item">入住日期：${order.arriveDate }</li>
+							<li class="order-info-item">离店日期：${order.departureDate }</li>
+							<li class="order-info-item">保留时效：${order.generateTime }</li>
+							<li class="order-info-item">房型： ${order.room.type }</li>
+							<li class="order-info-item">早餐：无</li>
+							<li class="order-info-item">酒店礼物：无</li>
+						</ul>
+					</div>
+				</div>
+				<div class="customerInfo">
+					<h3>联系人信息</h3>
+					<div>
+						<ul>
+							<li class="order-info-item">联系人姓名：${order.customer.name}</li>
+							<li class="order-info-item">手机号码：${order.customer.phone}</li>
+							<li class="order-info-item" id="customerNameNow">入住人：${order.customerName}</li>
+							<li class="order-info-item" id="customerPhoneNow">入住人电话：${order.customerPhone}</li>
+						</ul>
+					</div>
+				</div>
+				
+				<div class="editDiv">
+					<a href="javascript:void(0)" id="cancelOrder">取消订单</a>
+					<a href="javascript:void(0)" id="editOrder">修改预订内容</a>
+				</div>
+			</div>
+			
 		</div>
+		</c:forEach>
 		
-		<div class="order-advice">
-    		<ul>
-				<li>* 温馨提示： </li>
-				<li>  可以查询最近半年的订单信息。 </li>
-				<li>  酒店订单是指过去二个月内离店、取消、预订未到的订单，和所有预订有效的订单。 </li>
-				<li>  历史酒店订单是指二个月前及半年内的离店、取消和预订未到的订单。 </li>
-				<li>  离店后7天内，入住人可以对入住分店进行点评。点击订单后方的点评链接进入，非入住人不可点评。 </li>
-				<li>  如需取消已支付的订单（积分兑换房、特价房、其它有限制不能取消的除外），请在入住当天18点前取消，房费全部退回储值（返现券和抵用券按规则返还）。</li>
-			</ul>
-    	</div>
+		
+		<span>${order.id}</span>
 	</div>
-	
-	<div class="modal fade" id="confirmDeleteDiv" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-	        <div class="modal-dialog" style="width:400px">
-	            <div class="modal-content">
-	                <div class="modal-header">
-	                    <button type="button" class="close" data-dismiss="modal">
-	                        <span aria-hidden="true">&times;</span>
-	                        <span class="sr-only">Close</span>
-	                    </button>
-	                    <h4 class="modal-title">确定删除吗？</h4>
-	                </div>
-	                <div class="modal-body">
-	          			<button id="confirmDelete" class="btn  btn-primary " type="button" >确定</button>
-	            		<button id="cancelDelete" class="btn  btn-primary " type="button">取消</button>
-	               </div>
-	            </div>
-	        </div>
-        </div>
-	
-	<div class="modal fade" id="deleteResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	   <div class="modal-dialog">
-	      <div class="modal-content">
-	         <div class="modal-body">
-	         	<h4></h4>
-	         </div>
-	      </div><!-- /.modal-content -->
-		</div><!-- /.modal -->
-	</div>
-	
 	<div class="modal fade" id="editOrderDiv" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width:400px">
             <div class="modal-content">
@@ -510,7 +540,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>
     <script src="jquery-ui.min.js"></script>
-	<script>
+	<script type="text/javascript">
 	
 	var d = new Date();
 	var year = d.getFullYear();
@@ -635,11 +665,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			document.location.href = "hotel/hotelInfoAction?hotelId="+hotelId;
    		});
    		
-   		$(".orderId").click(function(){
-   			var orderId = $(this).text();
-   			document.location.href = "order/orderInfoAction?orderId="+orderId;
-   		});
-   		
    		$("#checkOrder").click(function(){
     		document.location.href="order/checkOrderAction";
     	});
@@ -648,10 +673,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		document.location.href="toInfoAction";
     	});
     	
+    	var orderId = $("#orderId").text().substring(4).trim();
+    	
     	//取消订单
-    	$(".order-box tbody").delegate(".cancelOrderId","click",function(){
-    		var orderId = $(this).attr("data-id");
-    		var target = $(this);
+    	$("#cancelOrder").click(function(){
+    		//document.location.href="order/cancelOrderAction?orderId="+;
     		$("#cancelOrderDiv").addClass("in").css({
 				"display":" block",
 				"padding-right": "17px",
@@ -673,8 +699,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					
 					if(result=="已取消"){
 						var order = data.orders[0];
-						target.parents("tr").children(".orderStatusText").text("已过期");
-						target.parent().html('<a class="op deleteOrder" data-id="+orderId+" title="删除" href="javascript:void(0)">删除</a>');
+						$("#orderStatusChange label").text("房间已取消预订");
+						$("#orderStatusChange table tr:first-child").replaceWith(function(){
+							var tds = '<tr><td class="order-info-icon"></td><td class="order-info-icon order-status-active"></td></tr>';
+							return tds;
+						});
+						
+						$("#orderStatusChange table tr:last-child").replaceWith(function(){
+							var tds = '<tr><td >1.新订</td><td class=" order-status">2.离店</td></tr>';
+							return tds;
+						});
 					}
 					setTimeout(function(){
 						$("#cancelOrderDiv").removeClass("in").css({
@@ -687,10 +721,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	});
     	});
     	
-    	//修改订单
-    		$(".order-box tbody").delegate(".updateOrderId","click",function(){
-    			var orderId = $(this).attr("data-id");
-    			$("#editOrderDiv").addClass("in").css({
+    	
+    	
+    	$("#editOrder").click(function(){
+    		$("#editOrderDiv").addClass("in").css({
 				"display":" block",
 				"padding-right": "17px",
 				"text-align":"center"
@@ -702,8 +736,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					"padding-right": "0"
 				});
 	    	});
+	    	
+			
 			
 			$("#confirmEdit").click(function(){
+				
+				//var fuck = orderId.replace(/^订单号:$/,"");
 				$("#editOrderId").val(orderId);
 				$.post("order/editOrderAction",$("#editOrderForm").serialize(),function(data){
 					var result = data.result;
@@ -724,46 +762,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					},2000);
 				});
 			});
-    	});
-    	//删除订单
-    	$(".order-box tbody").delegate(".deleteOrder","click",function(){
-    	//$("#deleteOrder").click(function(){
-    		var currentTr = $(this).parents("tr");
-    		var orderId = $(this).attr("data-id");
-    		
-    		//弹出确认对话框
-    		$("#confirmDeleteDiv").addClass("in").css({
-				"display":" block",
-				"padding-right": "17px",
-				"text-align":"center"
-			});
-			
-			$("#cancelDelete").click(function(){
-	    		$("#confirmDeleteDiv").removeClass("in").css({
-					"display":"none",
-					"padding-right": "0"
-				});
-	    	});
-    		
-    		$("#confirmDelete").click(function(){
-	    		$.get("order/deleteOrderAction",{"orderId":orderId},function(data){
-	    			var result = data.result;
-	    			var orders = data.orders;
-	    			var html = $("#confirmDeleteDiv .modal-content").html();
-	    			$("#confirmDeleteDiv .modal-body").text(result);
-	    			
-	    			if(data.result=="已删除"){
-	    				currentTr.remove();
-	    			}
-	    			setTimeout(function(){
-						$("#confirmDeleteDiv").removeClass("in").css({
-							"display":"none",
-							"padding-right": "0"
-						});
-						$("#confirmDeleteDiv .modal-content").html(html);
-					},2000);
-	    		});
-    		});
     	});
 	</script>
 	<script src="js/ajax_log.js"></script>

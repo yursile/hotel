@@ -32,6 +32,12 @@ public class CheckOrderAction extends BaseAction{
 		return "checkOrder";
 	}
 	
+	public String orderInfo(){
+		Customer customer = (Customer) session.get("loginCustomer");
+		orders = orderService.findOrderByOrderId(customer.getId(), orderId);
+		return "orderInfo";
+	}
+	
 	public List<Order> getOrders() {
 		return orders;
 	}

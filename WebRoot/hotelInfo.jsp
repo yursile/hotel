@@ -177,21 +177,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<c:when test="${sessionScope.loginCustomer!=null}">
 							<li>
 								<label >姓名</label>
-								<input type="text" value="${sessionScope.loginCustomer.name }" />
+								<input type="text" value="${sessionScope.loginCustomer.name }" name="customerName" />
 							</li>
 							<li>
 								<label>手机号码</label>
-								<input type="text" value="${sessionScope.loginCustomer.phone }" />
+								<input type="text" value="${sessionScope.loginCustomer.phone }" name="customerPhone" />
 							</li>
 						</c:when>
 						<c:otherwise>
 							<li>
 								<label >姓名</label>
-								<input type="text" placeholder="请输入姓名" />
+								<input type="text" placeholder="请输入姓名" name="customerName"/>
 							</li>
 							<li>
 								<label>手机号码</label>
-								<input type="text" placeholder="请输入手机" />
+								<input type="text" placeholder="请输入手机" name="customerPhone"/>
 							</li>
 						</c:otherwise>
 						</c:choose>

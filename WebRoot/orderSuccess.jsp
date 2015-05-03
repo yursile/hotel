@@ -206,7 +206,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="container" style="margin-top:100px;">
     	<div class="center">
     	
-	    	<h2 class="hotelName">7天连锁酒店 （${hotelName}）</h2>
+	    	<h2 class="hotelName">yursile连锁酒店 （${hotelName}）</h2>
 	    	
 	    	<c:forEach items="${dayList}" var="day">
 	    			<time class="successTime">${day}</time>
@@ -225,6 +225,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<p class="tips">
     			根据目前国家公安条例的严格规定，所有进入酒店的住客和访客均需携带身份证到前台登记，如不能提供有效身份证明，我们酒店将无法办理入住，非常感谢您的配合！ 
     		</p>
+    		<span id="orderId" style="display:none">${orderId}</span>
     	</div>
     </div>
     
@@ -245,8 +246,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	 <script src="js/ajax_log.js"></script>
   	 <script type="text/javascript">
   	 	$("#checkOrder2").click(function(){
-			alert("ddd");
-			document.location.href="order/checkOrderAction";
+  	 		var orderId = $("#orderId").text();
+			document.location.href="order/orderInfoAction?orderId="+orderId;
 		});
 		
 		$("#returnMain").click(function(){

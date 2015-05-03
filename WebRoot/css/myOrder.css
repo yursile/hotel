@@ -229,3 +229,188 @@ time{
     line-height: 20px;
     margin:10px;
 }
+
+
+
+.orderInfo-box{
+	background-image: url("http://pic1.plateno.com/image2/member/order/backgr-icon.png");
+    border-left: thin solid #dfdfdf;
+    border-right: thin solid #dfdfdf;
+    height: 88px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    padding-top: 10px;
+    width: 100%;
+    
+    color: #000;
+    font-family: arial,"Hiragino Sans GB","Microsoft Yahei",sans-serif;
+    font-size: 12px;
+    line-height: 20px;
+    
+}
+.orderInfo-box label{
+	font-weight:normal;
+}
+
+ul,li{
+	margin:0;padding:0;
+}
+
+
+.order-title{
+	 background-color: #fff;
+    border: thin solid #eae9e6;
+    height: 80px;
+    margin: -2px auto 0;
+    width: 955px;
+}
+
+.order-title-item{
+	 margin: 10px 0 0 22px;
+    width: 30%;
+     float: left;
+    height: 100%;
+    border-right:1px rgb(234,233,230) solid;
+	
+}
+
+.order-info{
+	 background-image: url("http://pic1.plateno.com/image2/member/order/container-background.png");
+    border-left: thin solid #dfdfdf;
+    border-right: thin solid #dfdfdf;
+    height: 367px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    width: 100%;
+}
+.roomInfo{
+	background-color: #fff;
+    border: thin solid #eae9e6;
+    height: 203px;
+    margin: auto;
+    width: 955px;
+    border-bottom: thin dashed #ccc;
+	padding: 25px;
+    padding-bottom:0;
+}
+
+.hotelName{
+	color: #f00;
+    margin-bottom: 8px;
+    
+}
+.hotelName a{
+	color: #f00;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bolder;
+    margin-right: 100px;
+}
+.roomInfo-bottom{
+	
+}
+.order-info-item{
+	float:left;
+	width:270px;
+	height:30px;
+}
+.customerInfo{
+	background-color: #fff;
+    border: thin solid #eae9e6;
+    height: 113px;
+    margin: auto;
+    width: 955px;
+    padding: 25px;
+    padding-top:0;
+}
+
+#cancelOrder{
+	background: url("http://pic1.plateno.com/image2/member/order/botton2.jpg") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+    float: right;
+    height: 27px;
+    line-height: 27px;
+    margin-right: 5px;
+    text-align: center;
+    width: 103px;
+     position:absolute;
+    bottom:-35px;
+    right:0;
+}
+
+#editOrder{
+	background: url("http://pic1.plateno.com/image2/member/order/botton1.jpg") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+    float: right;
+    height: 26px;
+    line-height: 26px;
+    margin-right: 26px;
+    text-align: center;
+    width: 97px;
+    position:absolute;
+    bottom:-35px;
+    right:100px;
+}
+#editOrder:hover,#cancelOrder:hover{
+	text-decoration:none;
+	color:#000;
+}
+
+.infoName{
+	margin-top:0;
+}
+
+.titleName{
+	font-size: 15px;font-weight: bold;
+}
+
+.editDiv{
+	position:relative;
+}
+
+ .blue{
+ 	color: #0e91c4;
+    font-size: 13px;
+    font-weight: bolder;
+    margin-bottom: 6px;
+ }
+ .order-info-icon{
+ 	 background: url("http://pic1.plateno.com/image2/member/order/botton_icon.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: default;
+    height: 2px;
+    line-height: 0;
+    margin: 0;
+    width: 59px;
+    background-position: -44px -361px;
+ }
+.order-title-item .order-status-active{
+ 	background-position: -44px -348px;
+ }
+ .order-status{
+  	color: #0e91c4;
+    font-weight: bolder;
+  }
+  
+  .order-title-item td{
+  	text-align:center;
+  }
+  .editOrderLi{
+  	margin-bottom:10px;
+  }
+  
+  .editOrderLi .editOrderLabel{
+  	width:59px;
+  	text-align:right;
+  	margin-right:44px;
+  }
+   .editOrderLi .editOrderIpt{
+   	display:inline-block;
+   	width:200px;
+   }
+   
+   #confirmEdit,#cancelEdit{
+   	width:100px;
+   	margin-bottom:0;
+   }

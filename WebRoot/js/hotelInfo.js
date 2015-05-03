@@ -51,7 +51,6 @@ $("#submit-order").click(function(){
 		$("#back-num").val(num);
 		$("#hotel-orderForm").submit();
 	}
-	
 });
 
 
@@ -182,7 +181,7 @@ $(function(){
 		
 	});
 	
-	$("#checkOrder").click(function(){
+$("#checkOrder").click(function(){
 	document.location.href="order/checkOrderAction";
 });
 

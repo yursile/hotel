@@ -169,11 +169,93 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public List<Order> findOrderByHotel(long customerId, long hotelId) {
 		try {
-			List<Order> orders = orderDAO.findOrder("from Order o where o.customer.id=? and o.room.hotel.id =?", customerId, hotelId);
+			List<Order> orders = orderDAO.findOrder("from Order o where o.customer.id=? and o.room.hotel.id =? order by o.id desc", customerId, hotelId);
 			return orders;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public String saveOrder(Customer customer, long roomId, long hotelId,
+			int num, String days, String customerName, String customerPhone) {
+		List<int []> dayList = HotelUtil.formatDay(days);
+		Room room = roomService.findRoomById(roomId);
+		int generateTime = HotelUtil.getNowDay();
+		for(int [] group:dayList){
+			int arriveDate = group[0];
+			int departureDate = group[group.length-1];
+			Order order = new Order();
+			
+			for(int i=arriveDate;i<=departureDate;i++){
+				RoomRemain rr = roomRemainService.findRoomRemain(i, room);
+				if(rr==null){
+					return "房间已满";
+				}else{
+					rr.setRemain(rr.getRemain()-1);
+				}
+				
+			}
+			order.setRoom(room);
+			
+			//order.setHotel(hotel);
+			order.setCustomerName(customerName);
+			order.setCustomerPhone(customerPhone);
+			order.setNum(num);
+			order.setArriveDate(arriveDate);
+			order.setDepartureDate(departureDate);
+			order.setPrice(room.getPrice()*(departureDate-arriveDate+1));
+			order.setGenerateTime(generateTime);
+			order.setStatus(1);
+			order.setCustomer(customer);
+			try {
+				orderDAO.saveOrder(order);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "系统错误";
+			}
+		}
+		return "预订成功";
+	}
+
+	@Override
+	public String editOrder(Customer customer, long orderId,
+			String customerName, String customerPhone) {
+		Order order = findOrderByOrderId(customer.getId(), orderId).get(0);
+		order.setCustomerName(customerName);
+		order.setCustomerPhone(customerPhone);
+		try {
+			orderDAO.editOrder(order);
+			return "修改成功";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return"系统出错";
+		}
+	}
+
+	@Override
+	public String cancelOrder(Customer customer, long orderId) {
+		Order order = findOrderByOrderId(customer.getId(), orderId).get(0);
+		try {
+			order.setStatus(2);
+			orderDAO.editOrder(order);
+			return "已取消";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return"系统出错";
+		}
+	}
+
+	@Override
+	public String deleteOrder(Customer customer, long orderId) {
+		Order order = findOrderByOrderId(customer.getId(), orderId).get(0);
+		try {
+			orderDAO.deleteOrder(order);
+			return "已删除";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "系统出错";
+		}
 	}
 }

@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class BaseAction extends ActionSupport implements SessionAware,RequestAware{
 	protected Map<String, Object> session;
+	private String result;
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
@@ -16,5 +17,11 @@ public class BaseAction extends ActionSupport implements SessionAware,RequestAwa
 	protected Map<String, Object> request;
 	public void setRequest(Map<String, Object> request) {
 		this.request = request;
+	}
+	public String getResult() {
+		return result;
+	}
+	public void setResult(String result) {
+		this.result = result;
 	}
 }

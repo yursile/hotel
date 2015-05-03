@@ -12,4 +12,8 @@ public interface OrderService {
 	public List<Order> findOrderByHotel(long customerId,long hotelId);
 	public void saveOrder(Order order,String day);
 	public String saveOrder(Customer customer,long roomId,long hotelId,int num,String days);
+	public String saveOrder(Customer customer,long roomId,long hotelId,int num,String days,String customerName,String customerPhone);
+	public String editOrder(Customer customer,long orderId,String customerName,String customerPhone);
+	public String cancelOrder(Customer customer,long orderId);
+	public String deleteOrder(Customer customer,long orderId);
 }

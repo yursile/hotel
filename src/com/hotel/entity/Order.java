@@ -10,6 +10,9 @@ public class Order {
 	private int status;//1 预订  2取消  3预订未到  4在住  5离店
 	private int num;//预订该房间类型数量 
 	private Room room;//预订房间类型
+	private String customerName;
+	private String customerPhone;
+	
 	
 	public long getId() {
 		return id;
@@ -64,5 +67,17 @@ public class Order {
 	}
 	public void setGenerateTime(int generateTime) {
 		this.generateTime = generateTime;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getCustomerPhone() {
+		return customerPhone;
+	}
+	public void setCustomerPhone(String customerPhone) {
+		this.customerPhone = customerPhone;
 	}
 }
