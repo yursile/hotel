@@ -12,6 +12,6 @@
 		<property name="IDCard"></property>
 		<property name="type"></property>
 		<property name="birthday"></property>
-		<many-to-one name="picture"  class="Pic" unique="true" column="pic_id"></many-to-one>
+		<many-to-one name="picture"  class="Pic"  column="pic_id" lazy="false" cascade="all"></many-to-one>
 	</class>	
 </hibernate-mapping>

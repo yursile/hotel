@@ -13,6 +13,7 @@ import com.hotel.dao.CommonDAO;
 
 public class CommonDAOImpl<E> extends HibernateDaoSupport implements CommonDAO<E>{
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<E> findDataByPage(final String hql, final Integer pageNum,
 			final Integer numPerPage) throws Exception {
@@ -25,7 +26,7 @@ public class CommonDAOImpl<E> extends HibernateDaoSupport implements CommonDAO<E
 				query.setMaxResults(numPerPage);
 				System.out.println("dao excute");
 				List<E> list = query.list();
-				return query.list();
+				return list;
 			}
 		});
 	}
@@ -39,7 +40,6 @@ public class CommonDAOImpl<E> extends HibernateDaoSupport implements CommonDAO<E
 	@Override
 	public void delete(Object o) throws Exception {
 		this.getHibernateTemplate().delete(o);
-		
 	}
 
 	@Override
@@ -50,10 +50,12 @@ public class CommonDAOImpl<E> extends HibernateDaoSupport implements CommonDAO<E
 
 	@Override
 	public E findDataByString(final String hql,final String str) throws Exception {
+		@SuppressWarnings("unchecked")
 		List<E> curent= this.getHibernateTemplate().find(hql,str);
 		return curent.get(0);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public E findById(String hql, long id) throws Exception {
 		List<E> curent= this.getHibernateTemplate().find(hql,id);

@@ -174,10 +174,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<label>确认密码</label><input class="text" type="password" name="repassword" id="repassword"/>
 						<span for="mobilePhone" class="error hidden">请确认您的密码</span>
 					</li>
+					<!-- 
 					<li class="item">
 						<label>验证码</label><input class="text" type="text" name="code" />
 						<span for="mobilePhone" class="error hidden">请输入验证码</span>
 					</li>
+					 -->
 					<li class="item">
 						<input type="checkbox"/>
 						<label class="agree">我已阅读同意</label>

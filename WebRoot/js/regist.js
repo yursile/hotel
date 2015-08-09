@@ -88,7 +88,7 @@ $(".regbtn").click(function(){
 		},2000);
 	}else{
 		$.post("user/regist.action",$("#regForm").serialize()).done(function(data){
-			if(data=="success"){
+			if(data=="注册成功"){
 				$("aside .step").attr("src","http://pic1.plateno.com/image2/login/registry_step2.jpg");
 				$("#regForm").hide();
 				$("#registRS").show();

@@ -281,7 +281,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     					
     					<a class="watchpic">查看相册</a>
     					<figcaption>
-    						<h3><a class="fig-title" href="#">${hotel.name}</a></h3>
+    						<h3><a class="fig-title" href="hotel/hotelInfoAction.action?hotelId=${hotel.id}">${hotel.name}</a></h3>
     						<address>${hotel.address}</address>
     						<p class="phone">${hotel.phone}</p>
     					</figcaption>

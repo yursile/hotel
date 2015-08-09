@@ -22,10 +22,9 @@ public class QuickSearchAction extends BaseAction{
 	public String execute(){
 		session.put("arriveDate", arriveDate);
 		session.put("departureDate", departureDate);
-		
-		if(district.trim().length()==0&&arriveDate.trim().length()==0){
+		if((district.trim().length()==0||district.trim().equals("不限"))&&arriveDate.trim().length()==0){
 			hotels = hotelService.findHotels(city);
-		}else if(district.trim().length()==0&&arriveDate.trim().length()!=0){
+		}else if((district.trim().length()==0||district.trim().equals("不限"))&&arriveDate.trim().length()!=0){
 			hotels = hotelService.findHotels(city, arriveDate, departureDate);
 		}else if(district.trim().length()!=0&&arriveDate.trim().length()==0){
 			hotels = hotelService.findHotels(city, district);

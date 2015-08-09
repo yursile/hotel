@@ -193,7 +193,7 @@ figure img{
    border:1px solid #f9e1b9;
 }
 .icon-distance{
-	 background: url("http://pic1.plateno.com/v/20140304/image2/booking/inn_info.png") no-repeat scroll -125px -10px rgba(0, 0, 0, 0);
+	 background: url("../pic/inn_info.png") no-repeat scroll -125px -10px rgba(0, 0, 0, 0);
     display: inline-block;
     height: 115px;
     left: 30px;

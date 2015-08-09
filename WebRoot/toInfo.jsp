@@ -92,11 +92,70 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		.errorInfo{
 			text-align:center;
 			color:red;
+			margin-left:100px;
 		}
 		.changePassResult{
 			
 		}
+		.photo-title{
+			border: 1px solid #d1d1d1;
+		    color: #000;
+		    font-family: arial,"Hiragino Sans GB","Microsoft Yahei",sans-serif;
+		    font-size: 12px;
+		    line-height: 20px;
+		    margin-left:81px;
+		    background:rgb(242,242,242);
+		}
+		.info-photo{
+			border: 1px solid #d1d1d1;
+			left:217px;
+			top:121px;
+			width:80px;height:80px;overflow:hidden;
+			position:absolute;
+			padding:1px;
+			cursor:pointer;
+		}
+		.info-photo:hover a{
+			display:inline-block;
+		}
+		.info-photo img{
+			position:absolute;
+		}
+	
+		.info-photo a{
+			display:none;
+			position:absolute;
+			text-align:center;
+			color:#fff;
+			background:#000;
+			opacity:.5;
+			height:20px;
+			bottom:0;
+			width:100%;
+		}
+		.info-photo a:hover{
+			text-decoration:none;
+		}
+		.uploadPhotoFile{
+			position:absolute;
+			opacity:0;
+			width:80px;height:30px;
+			left:14px;top:0;
+			cursor:pointer;
+		}
+		#originalPhoto{
+			text-align:center;
+			margin:10px 0;
+			height:300px;
+			overflow:hidden;
+		}
+		#originalPhoto img{
+			box-shadow:0 0 5px #000;
+		}
 		
+		.changePhoto-title{
+			margin:0;
+		}
     </style>
 </head>
  <body>
@@ -153,6 +212,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
       </div>
     </div>
+   
     
     <div class="modal fade" id="logDiv" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width:400px">
@@ -204,9 +264,67 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </div>
     
+    
+     <div class="modal fade" id="changePicDiv"  tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:600px">
+            <div class="modal-content">
+                <div class="modal-header">
+                
+                 <button type="button" id="exitDivClose" class="close" data-dismiss="modal">
+                     <span aria-hidden="true">&times;</span>
+                    
+                     <span class="sr-only">Close</span>
+                 </button>
+                  <h4 class="changePhoto-title">修改头像</h4>
+                </div>
+                <div class="modal-body row">
+                	
+                	<div id="mainPhotoCtl" class="col-md-9">
+	                	<form enctype="multipart/form-data" method="post" action="pic/toUploadPhotoAction" id="toUploadPhotoForm">
+	                		<button type="button" class="btn btn-default" id="uploadPhoto">上传头像</button>
+                			<input type="file" class="uploadPhotoFile" name="photo"/>
+                			<input type="hidden" name="fileName" id="fileName"/>
+	                	</form>
+	                	<div id="originalPhoto">
+                					
+               			</div>
+                		
+                	</div>
+                	<div id="photoClt" class="col-md-3">
+                		<h3>预览</h3>
+                		<img src="${customer.picture.path}" width="100px">
+                	</div>
+                	<div class="changePhotoCtl col-md-8 col-md-offset-2">
+                		<button type="button" class="btn btn-default col-md-4" id="savePhoto">保存头像</button>
+                		<button type="button" class="btn btn-default col-md-offset-3 col-md-4"  id="cancelChangePhoto">放弃</button>
+                	</div>
+                </div>
+                <div class="modal-footer">
+                	<span id="changePhotoResult"></span>
+		         </div>
+            </div>
+        </div>
+    </div>
+    
 	<div class="container" style="margin-top:100px">
 		<div class="wrap">
-			<h1 style="font-size:12px">个人信息</h1>
+			<h1 style="font-size:12px;margin-bottom:50px">个人信息</h1>
+			
+			<div class="info-photo">
+				<c:choose>
+					<c:when test="${customer.picture.path==null}">
+						<img src="pic/photo.jpg" width="100px"></img>
+					</c:when>
+					<c:otherwise>
+						<img src="${customer.picture.path}" width="100px"></img>
+					</c:otherwise>
+				</c:choose>
+				<a data-toggle="modal" href="#changePicDiv">更换头像</a>
+			</div>
+			
+			
+			
+			
 			<table style="margin:0 auto" class="info_tb">
 				<thead>
 					<tr>
@@ -256,12 +374,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		               					<th colspan="70px"><label  for="inputPassword">密码</label></th>
 		               					<td> <input type="password" id="inputPassword" style="display:inline-block;width:210px" class="form-control" placeholder="密码" required name="customer.password"></td>
 		               				</tr>
+		               				<!--  
 		               				<tr>
 		               					<th colspan="70px"><label  for="code">验证码</label></th>
 		               					<td> <input type="text" id="code" class="form-control" style="width:90px;display:inline-block" placeholder="验证码码" required name="code"> <a class="change-btn">获取验证码</a></td>
 		               				</tr>
+		               				-->
 		               			</tbody>
 		               		</table>
+		               		<!--  <span class="errorInfo">验证失败</span>-->
 		                   <button id="toChangePhoneBtn" class="btn btn-lg btn-primary btn-block" style="margin-top:10px" type="button">下一步</button>
 		                    </form>
 		                </div>

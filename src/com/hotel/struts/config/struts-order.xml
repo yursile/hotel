@@ -6,15 +6,12 @@
 		<package name="order" extends="json-default" namespace="/order">
 			<action name="orderAction" class="orderAction" method="toOrder">
 				<result name="success">/orderSuccess.jsp</result>
-				<interceptor-ref name="loginStack"></interceptor-ref>
 			</action>
 			<action name="checkOrderAction" class="checkOrderAction" method="checkOrder">
 				<result name="checkOrder">/myOrder.jsp</result>
-				<interceptor-ref name="loginStack"></interceptor-ref>
 			</action>
 			<action name="orderInfoAction" class="checkOrderAction" method="orderInfo">
 				<result name="orderInfo">/orderInfo.jsp</result>
-				<interceptor-ref name="loginStack"></interceptor-ref>
 			</action>
 			
 			<action name="editOrderAction" class="orderAction" method="editOrder">
@@ -22,14 +19,12 @@
 					<param name="ignoreHierarchy">false</param>
             		<param name="includeProperties">result,orders.*</param>
 				</result>
-				<interceptor-ref name="loginStack"></interceptor-ref>
 			</action>
 			<action name="cancelOrderAction" class="orderAction" method="cancelOrder">
 				<result name="cancelOrder" type="json">
 					<param name="ignoreHierarchy">false</param>
             		<param name="includeProperties">result,orders.*</param>
 				</result>
-				<interceptor-ref name="loginStack"></interceptor-ref>
 			</action>
 			
 			<action name="deleteOrderAction" class="orderAction" method="deleteOrder">
@@ -37,7 +32,6 @@
 					<param name="ignoreHierarchy">false</param>
             		<param name="includeProperties">result,orders.*</param>
 				</result>
-				<interceptor-ref name="loginStack"></interceptor-ref>
 			</action>
 		</package>
 	</struts>

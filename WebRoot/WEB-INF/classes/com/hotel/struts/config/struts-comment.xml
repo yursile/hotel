@@ -10,7 +10,6 @@
 					<param name="ignoreHierarchy">false</param>
             		<param name="includeProperties">result,comments.*</param>
 				</result>
-				<interceptor-ref name="loginStack"></interceptor-ref>
 			</action>
 		</package>
 	</struts>

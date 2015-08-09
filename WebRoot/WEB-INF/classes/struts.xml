@@ -9,5 +9,5 @@
 		<include file="com/hotel/struts/config/struts-order.xml"></include>
 		<include file="com/hotel/struts/config/struts-dispatch.xml"></include>
 		<include file="com/hotel/struts/config/struts-comment.xml"></include>
-		<include file="com/hotel/struts/config/hotel-default.xml"></include>
+		<include file="com/hotel/struts/config/struts-pic.xml"></include>
 	</struts>

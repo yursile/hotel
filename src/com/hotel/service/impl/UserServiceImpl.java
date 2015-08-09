@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import com.hotel.dao.UserDAO;
 import com.hotel.entity.Customer;
+import com.hotel.entity.Pic;
 import com.hotel.exception.ServException;
 import com.hotel.service.UserService;
 
@@ -52,13 +53,16 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void regist(Customer customer) throws ServException {
 		try {
-			//customer.setBirthday(customer.getIDCard().substring(6));
+			Pic picture = new Pic();
+			//未上传图片
+			picture.setId(14);
+			customer.setPicture(picture);
+			customer.setBirthday(customer.getIDCard().substring(6, 14));
 			customer.setType("0");
 			userDAO.addCustomer(customer);
 		} catch (SQLException e) {
 			throw new ServException("注册失败");
 		}
-		
 	}
 
 	@Override

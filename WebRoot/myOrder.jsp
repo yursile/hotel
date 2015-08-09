@@ -376,7 +376,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</c:choose>
 						</tr>
 					</c:forEach>
-					
+					<!-- 
 					<tr>
 						<td><a class="orderId" href="javascript:void(0)">7896</a></td>
 						<td>2015-04-09</td>
@@ -392,6 +392,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<a class="op" href="javascript:void(0)" title="修改">修改</a>
 						</td>
 					</tr>
+					 -->
 				</tbody>
 			</table>
 			
@@ -746,7 +747,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	});
     		
     		$("#confirmDelete").click(function(){
-	    		$.get("order/deleteOrderAction",{"orderId":orderId},function(data){
+	    		$.get("order/deleteOrderAction",{orderId:orderId},function(data){
 	    			var result = data.result;
 	    			var orders = data.orders;
 	    			var html = $("#confirmDeleteDiv .modal-content").html();

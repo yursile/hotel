@@ -428,7 +428,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<h3 class="infoName">房间信息</h3>
 					<div class="roomInfo-top">
 						<ul>
-							<li class="hotelName"><a href="javascript:void(0)">${order.room.hotel.name }</a></li>
+							<li class="hotelName"><a href="javascript:void(0)" data-hotelId="${order.room.hotel.id}">${order.room.hotel.name }</a></li>
 							<li class="hotelAdress"><address>${order.room.hotel.address }</address></li>
 						</ul>
 					</div>
@@ -497,7 +497,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                		</li>
 	                		<li class="editOrderLi">
 	                			 <label class="editOrderLabel" for="customerPhone" >联系电话</label>
-	                   			 <input type="password" id="customerPhone" class="form-control editOrderIpt" required name="customerPhone">
+	                   			 <input type="text" id="customerPhone" class="form-control editOrderIpt" required name="customerPhone">
 	                		</li>
 	                		<li class="editOrderLi">
 	                			<button id="confirmEdit" class="btn  btn-primary " type="button" >确定</button>
@@ -661,7 +661,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		});
    		
    		$(".hotelName").click(function(){
-   			var hotelId = $(this).attr("data-hotelId");
+   			var hotelId = $(this).find("a").attr("data-hotelId");
    			document.location.href = "hotel/hotelInfoAction?hotelId="+hotelId;
    		});
    		
@@ -740,8 +740,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			
 			$("#confirmEdit").click(function(){
-				
-				//var fuck = orderId.replace(/^订单号:$/,"");
 				$("#editOrderId").val(orderId);
 				$.post("order/editOrderAction",$("#editOrderForm").serialize(),function(data){
 					var result = data.result;

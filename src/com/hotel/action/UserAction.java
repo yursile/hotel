@@ -16,6 +16,7 @@ public class UserAction extends BaseAction{
 	private String newPhone;
 	private String code;
 	private String result;
+
 	public String getResult() {
 		return result;
 	}
@@ -97,6 +98,8 @@ public class UserAction extends BaseAction{
 		}
 		return "changePassword";
 	}
+	
+	
 	
 	public Customer getCustomer() {
 		return customer;

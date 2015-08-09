@@ -54,3 +54,68 @@ $("#info").click(function(){
 	document.location.href="toInfoAction";
 });
 
+
+
+
+
+
+
+
+
+
+$("#regForm").delegate(".item input","blur",function(){
+    var val = $(this).val().trim();
+    var validate_type = $(this).attr("data-validate");
+    if(val==""){
+        $(this).next().removeClass("hidden");
+        $(this).next().addClass("show");
+    }else if(validate_type && !validateType(validate_type,val)){
+        $(this).next().text($(this).attr("data-validateInfo"));
+        $(this).next().removeClass("hidden");
+        $(this).next().addClass("show");
+    }else{
+        $(this).next().removeClass("show");
+        $(this).next().addClass("hidden");
+    }
+});
+
+function validateType(type,val){
+    switch(type){
+        case "phone": return /^1[3,4,5,8,9][1-9]\d{8}$/.test(val);break;
+        case "IDCard": return /^\d{17}(\d|X|x)$/.test(val); break;
+        case "name": return /^[\u4E00-\u9FA5]{2,4}$/.test(val);break;
+        case "password": return /^[a-z | A-Z](\w|\.|,){5,15}$/.test(val);break;
+        default: return false;
+    }
+}
+
+
+$("#regForm").delegate("#password","blur",function(){
+    var password = $(this).val();
+    var repassword = $("#repassword").val();
+    if(password.trim()!=""&& repassword.trim()!=""){
+        if(password!=repassword){
+            $(this).next().removeClass("hidden");
+            $(this).next().text("两次输入不一致").addClass("show");
+        }
+        else{
+            $(this).next().removeClass("show");
+            $(this).next().text("请确认密码").addClass("hidden");
+        }
+    }
+});
+
+$("#regForm").delegate("#repassword","blur",function(){
+    var password = $("#password").val();
+    var repassword = $(this).val();
+    if(password.trim()!=""&& repassword.trim()!=""){
+        if(password!=repassword){
+            $(this).next().removeClass("hidden");
+            $(this).next().text("两次输入不一致").addClass("show");
+        }
+        else{
+            $(this).next().text("请确认密码").addClass("hidden");
+        }
+    }
+});
+

@@ -277,11 +277,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    			<div class="picroll-box">
 	    			<ul class="pic-roll">
 	    				<c:forEach items="${hotel.pics}" var="pic0" end="0">
-	    					<img src="${pic0.path}"/>
+	    					<li class="active"><img src="${pic0.path}"/></li>
 	    				</c:forEach>
 	    				
 	    				<c:forEach items="${hotel.pics}" var="pic" begin="1">
-	    					<li class="active"><img  src="${pic.path}"></li>
+	    					<li ><img  src="${pic.path}"></li>
 	    				</c:forEach>
 	    				<!-- 
 	    				<li class="active"><img  src="http://img1.plateno.com/inn/023040/e2d45cb45af35a3912563a99c973790e_120_120.jpg"></li><li><img  src="http://img1.plateno.com/inn/023040/5b54802ab4058d064a398b37f4b665f5_120_120.jpg"></li><li><img  src="http://img1.plateno.com/inn/023040/e2abb0a72aa00d4f9def423c49f6801b_120_120.jpg"></li><li><img  src="http://img1.plateno.com/inn/023040/e2d45cb45af35a3912563a99c973790e_120_120.jpg"></li><li><img src="http://img1.plateno.com/inn/023040/5b54802ab4058d064a398b37f4b665f5_120_120.jpg"></li><li><img class="" src="http://img1.plateno.com/inn/023040/e2abb0a72aa00d4f9def423c49f6801b_120_120.jpg"></li>
@@ -346,6 +346,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    			</li>
     			</c:forEach>
     		
+    		<!--  
     			<li class="comment-li">
     				<span class="comment-man">银卡会员18*******75</span>
     				<div class="comment-content">
@@ -353,6 +354,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     					<time class="comment-time">(2015-4-5 11:37)</time>
     				</div>
     			</li>
+    			-->
     			<li>
     				<div class="page-box">
 			    		<ul>
